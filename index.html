@@ -7,7 +7,7 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <meta
         name="theme-color"
@@ -27,7 +27,7 @@
 
     <meta
         name="description"
-        content="Calculateur de temps de recharge pour véhicule électrique">
+        content="Calculateur de temps de recharge véhicule électrique">
 
     <title>⚡ Calculateur de Charge</title>
 
@@ -49,26 +49,24 @@
 
 <div class="container">
 
-    <!-- En-tête -->
+    <!-- Bandeau -->
 
     <div class="vehicle-banner">
 
         <h2>⚡ Calculateur de Charge</h2>
 
         <p>
-            Estimation rapide du temps de recharge
+            Temps de recharge véhicule électrique
         </p>
 
     </div>
 
-    <!-- Batterie -->
+    <!-- Batterie + Niveaux -->
 
     <div class="card">
 
         <label for="capacite">
-
-            🔋 Capacité batterie (kWh)
-
+            🔋 Batterie (kWh)
         </label>
 
         <input
@@ -79,16 +77,10 @@
             value="46"
             oninput="update()">
 
-    </div>
-
-    <!-- Niveau actuel -->
-
-    <div class="card">
+        <br><br>
 
         <label>
-
             📉 Niveau actuel
-
         </label>
 
         <div class="controls">
@@ -96,23 +88,17 @@
             <button
                 type="button"
                 onclick="changeValue('actuel',-1)">
-
                 −
-
             </button>
 
             <span id="actuelValue">
-
                 35%
-
             </span>
 
             <button
                 type="button"
                 onclick="changeValue('actuel',1)">
-
                 +
-
             </button>
 
         </div>
@@ -125,16 +111,10 @@
             value="35"
             oninput="update()">
 
-    </div>
-
-    <!-- Niveau cible -->
-
-    <div class="card">
+        <br><br>
 
         <label>
-
             🎯 Niveau cible
-
         </label>
 
         <div class="controls">
@@ -142,23 +122,17 @@
             <button
                 type="button"
                 onclick="changeValue('cible',-1)">
-
                 −
-
             </button>
 
             <span id="cibleValue">
-
                 85%
-
             </span>
 
             <button
                 type="button"
                 onclick="changeValue('cible',1)">
-
                 +
-
             </button>
 
         </div>
@@ -178,9 +152,7 @@
     <div class="card">
 
         <label>
-
-            ⚡ Intensité de charge
-
+            ⚡ Intensité
         </label>
 
         <div class="amp-grid">
