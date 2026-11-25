@@ -2,9 +2,11 @@
   "id": "/",
   "name": "Calculateur de Charge",
   "short_name": "Charge EV",
-  "description": "Calculateur de temps de recharge pour véhicule électrique en monophasé et triphasé.",
+  "description": "Calculateur de temps de recharge pour véhicule électrique de 7 à 22kw",
 
   "lang": "fr",
+  "dir": "ltr",
+
   "start_url": "./",
   "scope": "./",
 
@@ -19,6 +21,8 @@
     "productivity",
     "auto"
   ],
+
+  "prefer_related_applications": false,
 
   "icons": [
     {
