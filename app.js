@@ -67,19 +67,24 @@ function chargerPreferences() {
         localStorage.getItem("phase");
 
     if (capacite !== null)
-        document.getElementById("capacite").value = capacite;
+        document.getElementById("capacite").value =
+            capacite;
 
     if (actuel !== null)
-        document.getElementById("actuel").value = actuel;
+        document.getElementById("actuel").value =
+            actuel;
 
     if (cible !== null)
-        document.getElementById("cible").value = cible;
+        document.getElementById("cible").value =
+            cible;
 
     if (amp !== null)
-        document.getElementById("amp").value = amp;
+        document.getElementById("amp").value =
+            amp;
 
     if (phase !== null)
-        document.getElementById("phase").value = phase;
+        document.getElementById("phase").value =
+            phase;
 }
 
 /* ==================================
@@ -140,6 +145,7 @@ function setPhase(mode) {
         document
             .querySelectorAll(".phase-btn")[1]
             .classList.add("selected");
+
     }
 
     update();
@@ -177,8 +183,8 @@ function setAmp(valeur) {
         .forEach(btn => {
 
             if (
-                btn.textContent.trim() ===
-                valeur + "A"
+                btn.textContent.trim()
+                === valeur + "A"
             ) {
 
                 btn.classList.add(
@@ -245,49 +251,17 @@ function update() {
     ).textContent =
         cible + "%";
 
-    const batteryInfo =
-        document.getElementById(
-            "batteryInfo"
-        );
-
-    if (batteryInfo) {
-
-        batteryInfo.classList.remove(
-            "warning",
-            "error"
-        );
-
-        if (capacite < 10) {
-
-            batteryInfo.textContent =
-                "⚠️ Batterie inhabituellement faible";
-
-            batteryInfo.classList.add(
-                "warning"
-            );
-
-        } else if (capacite > 150) {
-
-            batteryInfo.textContent =
-                "⚠️ Batterie inhabituellement élevée";
-
-            batteryInfo.classList.add(
-                "warning"
-            );
-
-        } else {
-
-            batteryInfo.textContent =
-                capacite + " kWh";
-        }
-    }
-
     if (cible <= actuel) {
 
         document.getElementById(
             "temps"
         ).textContent =
             "0 h 00 min";
+
+        document.getElementById(
+            "energie"
+        ).textContent =
+            "Énergie chargée : 0,0 kWh";
 
         document.getElementById(
             "etat"
@@ -304,6 +278,18 @@ function update() {
         ((cible - actuel)
         * capacite)
         / 100;
+
+    document.getElementById(
+        "energie"
+    ).textContent =
+
+        "Énergie chargée : " +
+
+        energie
+            .toFixed(1)
+            .replace(".", ",")
+
+        + " kWh";
 
     let puissance = 0;
 
@@ -440,12 +426,13 @@ if (
                 await navigator
                     .serviceWorker
                     .register(
-                        "./service-worker.js"
+                        "service-worker.js"
                     );
 
             } catch (error) {
 
                 console.error(
+                    "Erreur Service Worker",
                     error
                 );
 
