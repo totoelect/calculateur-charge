@@ -42,6 +42,8 @@ color:white;
 padding:8px;
 }
 
+/* Container */
+
 .container{
 
 max-width:420px;
@@ -58,11 +60,11 @@ gap:8px;
 
 .vehicle-banner{
 
-padding:8px;
+padding:10px;
 
 text-align:center;
 
-border-radius:16px;
+border-radius:18px;
 
 background:
 linear-gradient(
@@ -72,19 +74,25 @@ rgba(0,199,190,.15)
 );
 
 border:
-1px solid rgba(0,122,255,.2);
+1px solid rgba(0,122,255,.20);
+
+box-shadow:
+0 0 12px
+rgba(0,122,255,.15);
 }
 
 .vehicle-banner h2{
 
-font-size:1.2rem;
+font-size:1.45rem;
 
 font-weight:700;
+
+margin-bottom:2px;
 }
 
 .vehicle-banner p{
 
-font-size:.7rem;
+font-size:.75rem;
 
 color:var(--text2);
 }
@@ -93,7 +101,7 @@ color:var(--text2);
 
 .card{
 
-padding:10px;
+padding:12px;
 
 border-radius:18px;
 
@@ -104,37 +112,41 @@ border:
 1px solid rgba(0,122,255,.10);
 }
 
+/* Labels */
+
 .card label{
 
 display:block;
 
-font-size:.85rem;
+font-size:.9rem;
 
 font-weight:600;
 
 margin-bottom:6px;
 }
 
-/* Batterie */
+/* Champ capacité */
 
-input[type=number]{
+#capacite{
 
-width:100%;
+width:80px;
 
-padding:10px;
+padding:8px;
+
+background:#102640;
 
 border:none;
 
-border-radius:12px;
-
-background:#102640;
+border-radius:10px;
 
 color:white;
 
 font-size:18px;
+
+text-align:center;
 }
 
-input[type=number]:focus{
+#capacite:focus{
 
 outline:none;
 }
@@ -154,15 +166,15 @@ margin-bottom:4px;
 
 .controls span{
 
-font-size:1.7rem;
+font-size:1.8rem;
 
-font-weight:bold;
+font-weight:700;
 }
 
 .controls button{
 
-width:44px;
-height:44px;
+width:46px;
+height:46px;
 
 border:none;
 
@@ -178,9 +190,16 @@ linear-gradient(
 color:white;
 
 font-size:22px;
+
+cursor:pointer;
 }
 
-input[type=range]{
+.controls button:active{
+
+transform:scale(.96);
+}
+
+input[type="range"]{
 
 width:100%;
 
@@ -214,8 +233,8 @@ border-radius:12px;
 background:
 linear-gradient(
 135deg,
-#132C48,
-#19385D
+#183658,
+#214872
 );
 
 color:white;
@@ -223,6 +242,8 @@ color:white;
 font-size:14px;
 
 font-weight:700;
+
+cursor:pointer;
 }
 
 .amp-btn.selected{
@@ -236,25 +257,14 @@ linear-gradient(
 
 box-shadow:
 0 0 10px
-rgba(0,199,190,.5);
+rgba(0,199,190,.55);
 }
 
-#ampValue{
-
-text-align:center;
-
-font-size:1.3rem;
-
-font-weight:bold;
-
-margin-top:8px;
-}
-
-/* RESULTAT */
+/* Résultat */
 
 .result{
 
-padding:12px;
+padding:16px;
 
 border-radius:18px;
 
@@ -266,32 +276,38 @@ linear-gradient(
 #007AFF,
 #00C7BE
 );
-
-border:
-1px solid rgba(255,255,255,.1);
 }
 
 .result h2{
 
-font-size:.95rem;
+font-size:1rem;
 
-margin-bottom:6px;
+margin-bottom:8px;
 }
 
 #temps{
 
-font-size:2.2rem;
+font-size:2.3rem;
 
 font-weight:800;
 
 line-height:1.1;
+
+margin-bottom:6px;
 }
 
 #etat{
 
-margin-top:4px;
+font-size:.95rem;
 
-font-size:.85rem;
+opacity:.95;
+}
+
+/* Ligne séparation */
+
+hr{
+
+opacity:.25;
 }
 
 /* iPhone SE */
@@ -300,22 +316,31 @@ font-size:.85rem;
 
 .vehicle-banner{
 
-padding:6px;
+padding:8px;
 }
 
 .vehicle-banner h2{
 
-font-size:1.05rem;
+font-size:1.15rem;
 }
 
 .vehicle-banner p{
 
-font-size:.6rem;
+font-size:.65rem;
 }
 
 .card{
 
 padding:8px;
+}
+
+#capacite{
+
+width:70px;
+
+padding:6px;
+
+font-size:16px;
 }
 
 .controls button{
@@ -328,7 +353,7 @@ font-size:18px;
 
 .controls span{
 
-font-size:1.3rem;
+font-size:1.4rem;
 }
 
 .amp-btn{
@@ -340,12 +365,22 @@ font-size:12px;
 
 .result{
 
-padding:10px;
+padding:12px;
+}
+
+.result h2{
+
+font-size:.85rem;
 }
 
 #temps{
 
-font-size:1.8rem;
+font-size:1.9rem;
+}
+
+#etat{
+
+font-size:.8rem;
 }
 
 }
