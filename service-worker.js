@@ -1,8 +1,8 @@
 /* ====================================
-   CONFIGURATION
+   CACHE
 ==================================== */
 
-const CACHE_NAME = "charge-ev-v3";
+const CACHE_NAME = "charge-ev-v4";
 
 const FILES_TO_CACHE = [
 
@@ -10,6 +10,7 @@ const FILES_TO_CACHE = [
     "./index.html",
     "./style.css",
     "./app.js",
+
     "./manifest.json",
     "./offline.html",
 
@@ -32,10 +33,6 @@ self.addEventListener(
                 .open(CACHE_NAME)
 
                 .then(cache => {
-
-                    console.log(
-                        "Cache créé"
-                    );
 
                     return cache.addAll(
                         FILES_TO_CACHE
@@ -60,8 +57,7 @@ self.addEventListener(
 
         event.waitUntil(
 
-            caches
-                .keys()
+            caches.keys()
 
                 .then(keys => {
 
@@ -72,11 +68,6 @@ self.addEventListener(
                             if (
                                 key !== CACHE_NAME
                             ) {
-
-                                console.log(
-                                    "Cache supprimé",
-                                    key
-                                );
 
                                 return caches.delete(
                                     key
@@ -105,7 +96,7 @@ self.addEventListener(
     "fetch",
     event => {
 
-        /* Navigation HTML */
+        /* Navigation */
 
         if (
             event.request.mode ===
@@ -117,12 +108,6 @@ self.addEventListener(
                 fetch(
                     event.request
                 )
-
-                .then(response => {
-
-                    return response;
-
-                })
 
                 .catch(() => {
 
@@ -137,7 +122,7 @@ self.addEventListener(
             return;
         }
 
-        /* Fichiers statiques */
+        /* Fichiers */
 
         event.respondWith(
 
@@ -173,14 +158,6 @@ self.addEventListener(
 
                         });
 
-                })
-
-                .catch(() => {
-
-                    return caches.match(
-                        "./offline.html"
-                    );
-
                 });
 
             })
@@ -191,7 +168,7 @@ self.addEventListener(
 );
 
 /* ====================================
-   MESSAGES
+   MESSAGE UPDATE
 ==================================== */
 
 self.addEventListener(
