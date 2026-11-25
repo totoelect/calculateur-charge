@@ -2,25 +2,35 @@
    CACHE
 ==================================== */
 
-const CACHE_NAME = "charge-ev-v4";
+const CACHE_NAME = "charge-ev-v5";
+
+/* Récupère automatiquement le dossier
+   GitHub Pages courant */
+
+const BASE_PATH =
+    self.location.pathname
+        .replace(
+            "/service-worker.js",
+            ""
+        );
 
 const FILES_TO_CACHE = [
 
-    "./",
-    "./index.html",
-    "./style.css",
-    "./app.js",
+    BASE_PATH + "/",
+    BASE_PATH + "/index.html",
+    BASE_PATH + "/style.css",
+    BASE_PATH + "/app.js",
 
-    "./manifest.json",
-    "./offline.html",
+    BASE_PATH + "/manifest.json",
+    BASE_PATH + "/offline.html",
 
-    "./icons/icon-192.png",
-    "./icons/icon-512.png"
+    BASE_PATH + "/icons/icon-192.png",
+    BASE_PATH + "/icons/icon-512.png"
 
 ];
 
 /* ====================================
-   INSTALLATION
+   INSTALL
 ==================================== */
 
 self.addEventListener(
@@ -31,7 +41,6 @@ self.addEventListener(
 
             caches
                 .open(CACHE_NAME)
-
                 .then(cache => {
 
                     return cache.addAll(
@@ -48,7 +57,7 @@ self.addEventListener(
 );
 
 /* ====================================
-   ACTIVATION
+   ACTIVATE
 ==================================== */
 
 self.addEventListener(
@@ -96,8 +105,6 @@ self.addEventListener(
     "fetch",
     event => {
 
-        /* Navigation */
-
         if (
             event.request.mode ===
             "navigate"
@@ -112,7 +119,8 @@ self.addEventListener(
                 .catch(() => {
 
                     return caches.match(
-                        "./offline.html"
+                        BASE_PATH +
+                        "/offline.html"
                     );
 
                 })
@@ -121,8 +129,6 @@ self.addEventListener(
 
             return;
         }
-
-        /* Fichiers */
 
         event.respondWith(
 
@@ -135,7 +141,6 @@ self.addEventListener(
                 if (response) {
 
                     return response;
-
                 }
 
                 return fetch(
@@ -144,19 +149,20 @@ self.addEventListener(
 
                 .then(networkResponse => {
 
-                    return caches
-                        .open(CACHE_NAME)
+                    caches.open(
+                        CACHE_NAME
+                    )
 
-                        .then(cache => {
+                    .then(cache => {
 
-                            cache.put(
-                                event.request,
-                                networkResponse.clone()
-                            );
+                        cache.put(
+                            event.request,
+                            networkResponse.clone()
+                        );
 
-                            return networkResponse;
+                    });
 
-                        });
+                    return networkResponse;
 
                 });
 
@@ -168,7 +174,7 @@ self.addEventListener(
 );
 
 /* ====================================
-   MESSAGE UPDATE
+   UPDATE
 ==================================== */
 
 self.addEventListener(
