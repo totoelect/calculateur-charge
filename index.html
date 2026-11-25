@@ -31,9 +31,7 @@ content="Calculateur de temps de recharge véhicule électrique">
 
 <title>⚡ Calculateur de Charge</title>
 
-<link
-rel="manifest"
-href="manifest.json">
+<link rel="manifest" href="manifest.json">
 
 <link
 rel="apple-touch-icon"
@@ -61,14 +59,12 @@ href="style.css">
 
     </div>
 
-    <!-- Carte principale -->
+    <!-- Batterie + niveaux -->
 
     <div class="card">
 
         <label>
-
             🔋 kWh
-
         </label>
 
         <input
@@ -82,9 +78,7 @@ href="style.css">
         <br><br>
 
         <label>
-
             📉 Niveau actuel
-
         </label>
 
         <div class="controls">
@@ -92,17 +86,23 @@ href="style.css">
             <button
                 type="button"
                 onclick="changeValue('actuel',-1)">
+
                 −
+
             </button>
 
             <span id="actuelValue">
+
                 14%
+
             </span>
 
             <button
                 type="button"
                 onclick="changeValue('actuel',1)">
+
                 +
+
             </button>
 
         </div>
@@ -118,9 +118,7 @@ href="style.css">
         <br><br>
 
         <label>
-
             🎯 Niveau cible
-
         </label>
 
         <div class="controls">
@@ -128,17 +126,23 @@ href="style.css">
             <button
                 type="button"
                 onclick="changeValue('cible',-1)">
+
                 −
+
             </button>
 
             <span id="cibleValue">
+
                 80%
+
             </span>
 
             <button
                 type="button"
                 onclick="changeValue('cible',1)">
+
                 +
+
             </button>
 
         </div>
@@ -158,9 +162,40 @@ href="style.css">
     <div class="card">
 
         <label>
+            🔌 Installation
+        </label>
 
+        <div class="phase-grid">
+
+            <button
+                type="button"
+                class="phase-btn"
+                onclick="setPhase('mono')">
+
+                Mono
+
+            </button>
+
+            <button
+                type="button"
+                class="phase-btn"
+                onclick="setPhase('tri')">
+
+                Tri
+
+            </button>
+
+        </div>
+
+        <input
+            id="phase"
+            type="hidden"
+            value="tri">
+
+        <br>
+
+        <label>
             ⚡ Intensité
-
         </label>
 
         <div class="amp-grid">
@@ -169,35 +204,45 @@ href="style.css">
                 type="button"
                 class="amp-btn"
                 onclick="setAmp(8)">
+
                 8A
+
             </button>
 
             <button
                 type="button"
                 class="amp-btn"
                 onclick="setAmp(10)">
+
                 10A
+
             </button>
 
             <button
                 type="button"
                 class="amp-btn"
                 onclick="setAmp(12)">
+
                 12A
+
             </button>
 
             <button
                 type="button"
                 class="amp-btn"
                 onclick="setAmp(14)">
+
                 14A
+
             </button>
 
             <button
                 type="button"
                 class="amp-btn"
                 onclick="setAmp(16)">
+
                 16A
+
             </button>
 
         </div>
@@ -208,11 +253,11 @@ href="style.css">
             value="8">
 
         <hr
-            style="
-            border:none;
-            height:1px;
-            background:rgba(255,255,255,.10);
-            margin:12px 0;">
+        style="
+        border:none;
+        height:1px;
+        background:rgba(255,255,255,.10);
+        margin:10px 0;">
 
         <div class="result">
 
