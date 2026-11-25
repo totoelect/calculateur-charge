@@ -234,20 +234,20 @@ margin-top:4px;
 
 .result{
 
-padding:10px;
+    padding:12px;
 
-border-radius:16px;
+    border-radius:16px;
 
-text-align:center;
+    text-align:center;
 
-background:
-linear-gradient(
-135deg,
-#007AFF,
-#00C7BE
-);
+    background:
+    linear-gradient(
+    135deg,
+    #007AFF,
+    #00C7BE
+    );
 
-margin-top:auto;
+    margin-top:0;
 }
 
 .result h2{
