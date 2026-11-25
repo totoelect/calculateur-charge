@@ -8,10 +8,10 @@
 
 --green:#30D158;
 --orange:#FF9F0A;
---red:#FF453A;
 
 --text:#FFFFFF;
---text2:#AFC1D3;
+--text2:#B8C5D6;
+
 }
 
 *{
@@ -22,7 +22,10 @@ box-sizing:border-box;
 
 body{
 
-font-family:-apple-system,
+min-height:100vh;
+
+font-family:
+-apple-system,
 BlinkMacSystemFont,
 sans-serif;
 
@@ -34,8 +37,6 @@ linear-gradient(
 );
 
 color:white;
-
-min-height:100vh;
 
 padding:20px;
 }
@@ -52,15 +53,13 @@ margin:auto;
 background:
 linear-gradient(
 135deg,
-rgba(0,122,255,.15),
+rgba(0,122,255,.20),
 rgba(0,199,190,.15)
 );
 
-backdrop-filter:blur(20px);
-
 border-radius:28px;
 
-padding:25px;
+padding:24px;
 
 text-align:center;
 
@@ -69,6 +68,12 @@ margin-bottom:20px;
 border:
 1px solid
 rgba(0,122,255,.25);
+
+backdrop-filter:blur(20px);
+
+box-shadow:
+0 0 25px
+rgba(0,122,255,.15);
 }
 
 .vehicle-banner h2{
@@ -86,8 +91,7 @@ color:var(--text2);
 .card{
 
 background:
-
-rgba(15,31,51,.85);
+rgba(15,31,51,.90);
 
 border-radius:24px;
 
@@ -97,7 +101,7 @@ margin-bottom:18px;
 
 border:
 1px solid
-rgba(0,122,255,.15);
+rgba(0,122,255,.10);
 
 box-shadow:
 0 0 20px
@@ -108,9 +112,9 @@ rgba(0,122,255,.08);
 
 display:block;
 
-margin-bottom:12px;
-
 font-weight:600;
+
+margin-bottom:12px;
 }
 
 input[type=number]{
@@ -130,29 +134,29 @@ color:white;
 font-size:20px;
 }
 
+input[type=number]:focus{
+
+outline:none;
+
+box-shadow:
+0 0 8px
+rgba(0,122,255,.6);
+}
+
 .controls{
 
 display:flex;
 
-align-items:center;
-
 justify-content:space-between;
+
+align-items:center;
 }
 
 .controls span{
 
 font-size:2rem;
 
-font-weight:700;
-}
-
-button{
-
-border:none;
-
-cursor:pointer;
-
-color:white;
+font-weight:bold;
 }
 
 .controls button{
@@ -160,9 +164,9 @@ color:white;
 width:70px;
 height:70px;
 
-border-radius:50%;
+border:none;
 
-font-size:32px;
+border-radius:50%;
 
 background:
 linear-gradient(
@@ -171,9 +175,22 @@ linear-gradient(
 #0057d8
 );
 
+color:white;
+
+font-size:32px;
+
+cursor:pointer;
+
 box-shadow:
-0 0 15px
-rgba(0,122,255,.4);
+0 0 12px
+rgba(0,122,255,.45);
+
+transition:.2s;
+}
+
+.controls button:active{
+
+transform:scale(.95);
 }
 
 input[type=range]{
@@ -185,7 +202,7 @@ margin-top:15px;
 accent-color:#007AFF;
 }
 
-/* Ampérage */
+/* Intensité */
 
 .amp-grid{
 
@@ -201,13 +218,11 @@ margin-top:10px;
 
 .amp-btn{
 
-height:70px;
+height:65px;
+
+border:none;
 
 border-radius:18px;
-
-font-size:22px;
-
-font-weight:700;
 
 background:
 linear-gradient(
@@ -215,6 +230,16 @@ linear-gradient(
 #132c48,
 #19385d
 );
+
+color:white;
+
+font-size:22px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.2s;
 }
 
 .amp-btn.selected{
@@ -228,29 +253,31 @@ linear-gradient(
 
 box-shadow:
 0 0 18px
-rgba(0,122,255,.6);
+rgba(0,199,190,.5);
+
+transform:scale(1.03);
 }
 
 #ampValue{
 
-margin-top:18px;
+margin-top:15px;
 
 text-align:center;
 
-font-size:30px;
+font-size:28px;
 
 font-weight:bold;
 }
 
-/* résultat */
+/* Résultat */
 
 .result{
 
-margin-top:20px;
+margin-top:25px;
 
 padding:30px;
 
-border-radius:28px;
+border-radius:30px;
 
 text-align:center;
 
@@ -263,7 +290,7 @@ linear-gradient(
 
 box-shadow:
 0 0 30px
-rgba(0,199,190,.4);
+rgba(0,199,190,.35);
 }
 
 .result h2{
@@ -282,25 +309,42 @@ line-height:1.2;
 
 #etat{
 
-margin-top:15px;
+margin-top:12px;
 
 font-size:1.2rem;
 
 font-weight:600;
 }
 
+/* Responsive */
+
 @media(max-width:480px){
 
+.container{
+
+padding-bottom:20px;
+}
+
+.vehicle-banner h2{
+
+font-size:1.7rem;
+}
+
 #temps{
-font-size:2.4rem;
+
+font-size:2.5rem;
 }
 
 .controls button{
+
 width:60px;
 height:60px;
 }
 
 .amp-btn{
+
 height:60px;
+font-size:20px;
 }
+
 }
