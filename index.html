@@ -31,7 +31,9 @@ content="Calculateur de temps de recharge véhicule électrique">
 
 <title>⚡ Calculateur de Charge</title>
 
-<link rel="manifest" href="manifest.json">
+<link
+rel="manifest"
+href="manifest.json">
 
 <link
 rel="apple-touch-icon"
@@ -59,26 +61,49 @@ href="style.css">
 
     </div>
 
-    <!-- Batterie + niveaux -->
+    <!-- Carte principale -->
 
     <div class="card">
 
+        <!-- Batterie -->
+
+        <div class="battery-box">
+
+            <label>
+
+                🔋 Capacité batterie
+
+            </label>
+
+            <input
+                id="capacite"
+                type="number"
+                min="1"
+                value="45"
+                oninput="update()">
+
+            <span class="battery-unit">
+
+                kWh
+
+            </span>
+
+            <div id="batteryInfo">
+
+                45 kWh
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <!-- Niveau actuel -->
+
         <label>
-            🔋 kWh
-        </label>
 
-        <input
-            id="capacite"
-            type="number"
-            min="10"
-            max="120"
-            value="45"
-            oninput="update()">
-
-        <br><br>
-
-        <label>
             📉 Niveau actuel
+
         </label>
 
         <div class="controls">
@@ -117,8 +142,12 @@ href="style.css">
 
         <br><br>
 
+        <!-- Niveau cible -->
+
         <label>
+
             🎯 Niveau cible
+
         </label>
 
         <div class="controls">
@@ -157,12 +186,14 @@ href="style.css">
 
     </div>
 
-    <!-- Intensité + Résultat -->
+    <!-- Installation + Intensité + Résultat -->
 
     <div class="card">
 
         <label>
+
             🔌 Installation
+
         </label>
 
         <div class="phase-grid">
@@ -172,7 +203,7 @@ href="style.css">
                 class="phase-btn"
                 onclick="setPhase('mono')">
 
-                Mono
+                1Φ
 
             </button>
 
@@ -181,7 +212,7 @@ href="style.css">
                 class="phase-btn"
                 onclick="setPhase('tri')">
 
-                Tri
+                3Φ
 
             </button>
 
@@ -195,54 +226,51 @@ href="style.css">
         <br>
 
         <label>
+
             ⚡ Intensité
+
         </label>
 
         <div class="amp-grid">
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(8)">
-
                 8A
-
             </button>
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(10)">
-
                 10A
-
             </button>
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(12)">
-
                 12A
-
             </button>
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(14)">
-
                 14A
-
             </button>
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(16)">
-
                 16A
+            </button>
 
+            <button class="amp-btn"
+                onclick="setAmp(20)">
+                20A
+            </button>
+
+            <button class="amp-btn"
+                onclick="setAmp(25)">
+                25A
+            </button>
+
+            <button class="amp-btn"
+                onclick="setAmp(32)">
+                32A
             </button>
 
         </div>
@@ -253,11 +281,11 @@ href="style.css">
             value="8">
 
         <hr
-        style="
-        border:none;
-        height:1px;
-        background:rgba(255,255,255,.10);
-        margin:10px 0;">
+            style="
+            border:none;
+            height:1px;
+            background:rgba(255,255,255,.10);
+            margin:10px 0;">
 
         <div class="result">
 
@@ -275,7 +303,7 @@ href="style.css">
 
             <div id="etat">
 
-                🟢 Charge lente
+                ⚡ Charge rapide AC
 
             </div>
 
