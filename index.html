@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de Charge</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+
+<meta name="theme-color" content="#007AFF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🔋 Calculateur de Charge</h1>
+
+    <div class="card">
+        <label>Capacité batterie</label>
+        <input id="capacite" type="number" value="46">
+        <span>kWh</span>
+    </div>
+
+    <div class="card">
+        <label>📉 Niveau actuel</label>
+
+        <div class="controls">
+            <button onclick="changeValue('actuel',-1)">−</button>
+
+            <span id="actuelValue">35%</span>
+
+            <button onclick="changeValue('actuel',1)">+</button>
+        </div>
+
+        <input
+            id="actuel"
+            type="range"
+            min="0"
+            max="100"
+            value="35"
+            oninput="update()">
+    </div>
+
+    <div class="card">
+        <label>🎯 Niveau cible</label>
+
+        <div class="controls">
+            <button onclick="changeValue('cible',-1)">−</button>
+
+            <span id="cibleValue">85%</span>
+
+            <button onclick="changeValue('cible',1)">+</button>
+        </div>
+
+        <input
+            id="cible"
+            type="range"
+            min="0"
+            max="100"
+            value="85"
+            oninput="update()">
+    </div>
+
+    <div class="card">
+        <label>⚡ Ampérage</label>
+
+        <div class="controls">
+            <button onclick="changeValue('amp',-1)">−</button>
+
+            <span id="ampValue">10 A</span>
+
+            <button onclick="changeValue('amp',1)">+</button>
+        </div>
+
+        <input
+            id="amp"
+            type="range"
+            min="6"
+            max="32"
+            value="10"
+            oninput="update()">
+    </div>
+
+    <div class="result">
+        <h2>⏱ Temps estimé</h2>
+        <div id="temps">3 h 20 min</div>
+        <div id="etat"></div>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
