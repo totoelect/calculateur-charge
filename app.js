@@ -57,7 +57,7 @@ function chargerPreferences() {
 }
 
 /* ==========================
-   NIVEAUX %
+   POURCENTAGES
 ========================== */
 
 function changeValue(id, delta) {
@@ -89,6 +89,18 @@ function changeValue(id, delta) {
 
 function setAmp(valeur) {
 
+    const valeursAutorisees =
+        [8, 10, 12, 14, 16];
+
+    if (
+        !valeursAutorisees.includes(
+            valeur
+        )
+    ) {
+
+        valeur = 10;
+    }
+
     document
         .getElementById("amp")
         .value = valeur;
@@ -110,12 +122,16 @@ function setAmp(valeur) {
             const texte =
                 btn.textContent.trim();
 
-            if (texte === valeur + "A") {
+            if (
+                texte ===
+                valeur + "A"
+            ) {
 
                 btn.classList.add(
                     "selected"
                 );
             }
+
         });
 
     update();
@@ -193,4 +209,134 @@ function update() {
 
     if (cible <= actuel) {
 
-        document.getElementById
+        document.getElementById(
+            "temps"
+        ).textContent =
+            "0 h 00 min";
+
+        document.getElementById(
+            "etat"
+        ).textContent =
+            "✅ Niveau déjà atteint";
+
+        sauvegarder();
+
+        return;
+    }
+
+    const energie =
+        ((cible - actuel)
+            * capacite) / 100;
+
+    const puissance =
+        0.69 * amp;
+
+    const heures =
+        energie / puissance;
+
+    let h =
+        Math.floor(heures);
+
+    let min =
+        Math.round(
+            (heures - h) * 60
+        );
+
+    if (min === 60) {
+
+        h++;
+        min = 0;
+    }
+
+    document.getElementById(
+        "temps"
+    ).textContent =
+        h +
+        " h " +
+        String(min).padStart(2, "0") +
+        " min";
+
+    let etat = "";
+
+    if (amp <= 10) {
+
+        etat =
+            "🟢 Charge lente";
+
+    } else {
+
+        etat =
+            "🟡 Charge normale";
+    }
+
+    document.getElementById(
+        "etat"
+    ).textContent =
+        etat;
+
+    sauvegarder();
+}
+
+/* ==========================
+   INITIALISATION
+========================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        chargerPreferences();
+
+        let ampSauvegarde =
+            parseInt(
+                document.getElementById(
+                    "amp"
+                ).value
+            );
+
+        if (
+            ![8, 10, 12, 14, 16]
+            .includes(
+                ampSauvegarde
+            )
+        ) {
+
+            ampSauvegarde = 10;
+        }
+
+        setAmp(
+            ampSauvegarde
+        );
+
+    }
+);
+
+/* ==========================
+   SERVICE WORKER
+========================== */
+
+if (
+    "serviceWorker"
+    in navigator
+) {
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            navigator
+                .serviceWorker
+                .register(
+                    "service-worker.js"
+                )
+                .catch(error => {
+
+                    console.error(
+                        error
+                    );
+
+                });
+
+        }
+    );
+}
