@@ -123,10 +123,40 @@
 
     </div>
 
-    <!-- Ampérage -->
+  <!-- Ampérage -->
 
-    <div class="card">
+<div class="card">
 
-        <label>⚡ Ampérage</label>
+    <label>⚡ Intensité de charge</label>
 
-        <
+    <div class="amp-grid">
+
+        <button class="amp-btn" onclick="setAmp(8)">8A</button>
+        <button class="amp-btn" onclick="setAmp(10)">10A</button>
+        <button class="amp-btn" onclick="setAmp(12)">12A</button>
+
+        <button class="amp-btn" onclick="setAmp(14)">14A</button>
+        <button class="amp-btn" onclick="setAmp(16)">16A</button>
+        <button class="amp-btn" onclick="setAmp(20)">20A</button>
+
+        <button class="amp-btn" onclick="setAmp(32)">32A</button>
+
+    </div>
+
+    <div id="ampValue"
+         style="
+         margin-top:20px;
+         text-align:center;
+         font-size:28px;
+         font-weight:bold;">
+         10 A
+    </div>
+
+    <!-- Champ caché utilisé par le calcul -->
+
+    <input
+        id="amp"
+        type="hidden"
+        value="10">
+
+</div>
