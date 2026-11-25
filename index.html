@@ -45,16 +45,17 @@
 
     </div>
 
-    <!-- Batterie -->
+    <!-- Capacité batterie -->
 
     <div class="card">
 
-        <label>🔋 Capacité Batterie</label>
+        <label>🔋 Capacité Batterie (kWh)</label>
 
         <input
             id="capacite"
             type="number"
-            value="46">
+            value="46"
+            oninput="update()">
 
     </div>
 
@@ -128,14 +129,4 @@
 
         <label>⚡ Ampérage</label>
 
-        <div class="controls">
-
-            <button onclick="changeValue('amp',-1)">
-                −
-            </button>
-
-            <span id="ampValue">
-                10 A
-            </span>
-
-            <button
+        <
