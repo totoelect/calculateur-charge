@@ -44,20 +44,24 @@ function chargerPreferences() {
         localStorage.getItem("amp");
 
     if (capacite !== null)
-        document.getElementById("capacite").value = capacite;
+        document.getElementById("capacite").value =
+            capacite;
 
     if (actuel !== null)
-        document.getElementById("actuel").value = actuel;
+        document.getElementById("actuel").value =
+            actuel;
 
     if (cible !== null)
-        document.getElementById("cible").value = cible;
+        document.getElementById("cible").value =
+            cible;
 
     if (amp !== null)
-        document.getElementById("amp").value = amp;
+        document.getElementById("amp").value =
+            amp;
 }
 
 /* ==========================
-   POURCENTAGES
+   NIVEAUX %
 ========================== */
 
 function changeValue(id, delta) {
@@ -101,9 +105,8 @@ function setAmp(valeur) {
         valeur = 10;
     }
 
-    document
-        .getElementById("amp")
-        .value = valeur;
+    document.getElementById("amp").value =
+        valeur;
 
     document
         .querySelectorAll(".amp-btn")
@@ -119,11 +122,8 @@ function setAmp(valeur) {
         .querySelectorAll(".amp-btn")
         .forEach(btn => {
 
-            const texte =
-                btn.textContent.trim();
-
             if (
-                texte ===
+                btn.textContent.trim() ===
                 valeur + "A"
             ) {
 
@@ -181,16 +181,10 @@ function update() {
     ).textContent =
         cible + "%";
 
-    const ampValue =
-        document.getElementById(
-            "ampValue"
-        );
-
-    if (ampValue) {
-
-        ampValue.textContent =
-            amp + " A";
-    }
+    document.getElementById(
+        "ampValue"
+    ).textContent =
+        amp + " A";
 
     if (capacite <= 0) {
 
@@ -242,9 +236,10 @@ function update() {
             (heures - h) * 60
         );
 
-    if (min === 60) {
+    if (min >= 60) {
 
         h++;
+
         min = 0;
     }
 
@@ -296,17 +291,13 @@ document.addEventListener(
 
         if (
             ![8, 10, 12, 14, 16]
-            .includes(
-                ampSauvegarde
-            )
+                .includes(ampSauvegarde)
         ) {
 
             ampSauvegarde = 10;
         }
 
-        setAmp(
-            ampSauvegarde
-        );
+        setAmp(ampSauvegarde);
 
     }
 );
@@ -315,27 +306,34 @@ document.addEventListener(
    SERVICE WORKER
 ========================== */
 
-if (
-    "serviceWorker"
-    in navigator
-) {
+if ("serviceWorker" in navigator) {
 
     window.addEventListener(
         "load",
-        () => {
+        async () => {
 
-            navigator
-                .serviceWorker
-                .register(
-                    "service-worker.js"
-                )
-                .catch(error => {
+            try {
 
-                    console.error(
-                        error
-                    );
+                const registration =
+                    await navigator
+                        .serviceWorker
+                        .register(
+                            "./service-worker.js"
+                        );
 
-                });
+                console.log(
+                    "Service Worker enregistré :",
+                    registration.scope
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur Service Worker :",
+                    error
+                );
+
+            }
 
         }
     );
