@@ -6,9 +6,6 @@
 --blue:#007AFF;
 --cyan:#00C7BE;
 
---green:#30D158;
---orange:#FF9F0A;
-
 --text:#FFFFFF;
 --text2:#AFC1D3;
 
@@ -18,6 +15,13 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+}
+
+html,
+body{
+
+height:100%;
+overflow:hidden;
 }
 
 body{
@@ -36,33 +40,30 @@ linear-gradient(
 
 color:white;
 
-height:100vh;
-overflow:hidden;
-
-padding:10px;
+padding:6px;
 }
 
 .container{
 
-max-width:480px;
-margin:auto;
-
-height:100%;
+height:100vh;
 
 display:flex;
 flex-direction:column;
-gap:8px;
-}
 
-/* En-tête */
+gap:6px;
+
+max-width:420px;
+
+margin:auto;
+}
 
 .vehicle-banner{
 
-padding:10px;
-
-border-radius:18px;
+padding:6px;
 
 text-align:center;
+
+border-radius:14px;
 
 background:
 linear-gradient(
@@ -70,69 +71,59 @@ linear-gradient(
 rgba(0,122,255,.2),
 rgba(0,199,190,.15)
 );
-
-border:
-1px solid rgba(0,122,255,.2);
 }
 
 .vehicle-banner h2{
 
-font-size:1.3rem;
+font-size:1.05rem;
+
+font-weight:700;
 }
 
 .vehicle-banner p{
 
-font-size:.8rem;
+font-size:.65rem;
 
 color:var(--text2);
 }
 
-/* Cartes */
-
 .card{
 
+padding:8px;
+
+border-radius:16px;
+
 background:
-rgba(15,31,51,.92);
-
-border-radius:18px;
-
-padding:10px;
-
-border:
-1px solid rgba(0,122,255,.12);
+rgba(15,31,51,.95);
 }
 
 .card label{
 
 display:block;
 
-font-size:.9rem;
-
-margin-bottom:6px;
+font-size:.8rem;
 
 font-weight:600;
+
+margin-bottom:4px;
 }
 
-/* batterie */
-
-#capacite{
+input[type=number]{
 
 width:100%;
 
-padding:10px;
-
-border:none;
-
-border-radius:12px;
+padding:8px;
 
 background:#102640;
 
+border:none;
+
+border-radius:10px;
+
 color:white;
 
-font-size:1rem;
+font-size:15px;
 }
-
-/* sliders */
 
 .controls{
 
@@ -142,20 +133,20 @@ justify-content:space-between;
 
 align-items:center;
 
-margin-bottom:6px;
+margin-bottom:3px;
 }
 
 .controls span{
 
-font-size:1.5rem;
+font-size:1.15rem;
 
 font-weight:bold;
 }
 
 .controls button{
 
-width:44px;
-height:44px;
+width:34px;
+height:34px;
 
 border:none;
 
@@ -165,22 +156,22 @@ background:
 linear-gradient(
 135deg,
 #007AFF,
-#0057d8
+#0057D8
 );
 
 color:white;
 
-font-size:22px;
+font-size:16px;
 }
 
 input[type=range]{
 
 width:100%;
 
+margin-top:2px;
+
 accent-color:#007AFF;
 }
-
-/* ampérage */
 
 .amp-grid{
 
@@ -189,29 +180,29 @@ display:grid;
 grid-template-columns:
 repeat(5,1fr);
 
-gap:6px;
+gap:4px;
 
-margin-top:6px;
+margin-top:4px;
 }
 
 .amp-btn{
 
-height:42px;
+height:32px;
 
 border:none;
 
-border-radius:12px;
+border-radius:10px;
 
 background:
 linear-gradient(
 135deg,
-#132c48,
-#19385d
+#132C48,
+#19385D
 );
 
 color:white;
 
-font-size:15px;
+font-size:12px;
 
 font-weight:bold;
 }
@@ -226,28 +217,26 @@ linear-gradient(
 );
 
 box-shadow:
-0 0 10px
-rgba(0,199,190,.5);
+0 0 8px
+rgba(0,199,190,.4);
 }
 
 #ampValue{
 
 text-align:center;
 
-margin-top:6px;
-
-font-size:1.2rem;
+font-size:1rem;
 
 font-weight:bold;
-}
 
-/* Résultat */
+margin-top:4px;
+}
 
 .result{
 
-padding:16px;
+padding:10px;
 
-border-radius:20px;
+border-radius:16px;
 
 text-align:center;
 
@@ -263,21 +252,21 @@ margin-top:auto;
 
 .result h2{
 
-font-size:1rem;
+font-size:.85rem;
 
-margin-bottom:8px;
+margin-bottom:4px;
 }
 
 #temps{
 
-font-size:2rem;
+font-size:1.6rem;
 
 font-weight:800;
 }
 
 #etat{
 
-margin-top:5px;
+margin-top:3px;
 
-font-size:.9rem;
+font-size:.75rem;
 }
