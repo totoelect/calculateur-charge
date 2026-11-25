@@ -1,6 +1,12 @@
-/* ==========================
+/* ====================================
+   VALEURS AUTORISÉES
+==================================== */
+
+const AMPERAGES = [8, 10, 12, 14, 16];
+
+/* ====================================
    SAUVEGARDE
-========================== */
+==================================== */
 
 function sauvegarder() {
 
@@ -25,9 +31,9 @@ function sauvegarder() {
     );
 }
 
-/* ==========================
+/* ====================================
    CHARGEMENT
-========================== */
+==================================== */
 
 function chargerPreferences() {
 
@@ -43,26 +49,38 @@ function chargerPreferences() {
     const amp =
         localStorage.getItem("amp");
 
-    if (capacite !== null)
-        document.getElementById("capacite").value =
-            capacite;
+    if (capacite !== null) {
 
-    if (actuel !== null)
-        document.getElementById("actuel").value =
-            actuel;
+        document.getElementById(
+            "capacite"
+        ).value = capacite;
+    }
 
-    if (cible !== null)
-        document.getElementById("cible").value =
-            cible;
+    if (actuel !== null) {
 
-    if (amp !== null)
-        document.getElementById("amp").value =
-            amp;
+        document.getElementById(
+            "actuel"
+        ).value = actuel;
+    }
+
+    if (cible !== null) {
+
+        document.getElementById(
+            "cible"
+        ).value = cible;
+    }
+
+    if (amp !== null) {
+
+        document.getElementById(
+            "amp"
+        ).value = amp;
+    }
 }
 
-/* ==========================
-   NIVEAUX %
-========================== */
+/* ====================================
+   BOUTONS + -
+==================================== */
 
 function changeValue(id, delta) {
 
@@ -87,26 +105,22 @@ function changeValue(id, delta) {
     update();
 }
 
-/* ==========================
+/* ====================================
    AMPERAGE
-========================== */
+==================================== */
 
 function setAmp(valeur) {
 
-    const valeursAutorisees =
-        [8, 10, 12, 14, 16];
-
     if (
-        !valeursAutorisees.includes(
-            valeur
-        )
+        !AMPERAGES.includes(valeur)
     ) {
 
         valeur = 10;
     }
 
-    document.getElementById("amp").value =
-        valeur;
+    document.getElementById(
+        "amp"
+    ).value = valeur;
 
     document
         .querySelectorAll(".amp-btn")
@@ -123,8 +137,8 @@ function setAmp(valeur) {
         .forEach(btn => {
 
             if (
-                btn.textContent.trim() ===
-                valeur + "A"
+                btn.textContent.trim()
+                === valeur + "A"
             ) {
 
                 btn.classList.add(
@@ -137,9 +151,9 @@ function setAmp(valeur) {
     update();
 }
 
-/* ==========================
-   CALCUL
-========================== */
+/* ====================================
+   CALCUL PRINCIPAL
+==================================== */
 
 function update() {
 
@@ -148,7 +162,7 @@ function update() {
             document.getElementById(
                 "capacite"
             ).value
-        ) || 46;
+        ) || 45;
 
     const actuel =
         parseInt(
@@ -190,13 +204,11 @@ function update() {
 
         document.getElementById(
             "temps"
-        ).textContent =
-            "--";
+        ).textContent = "--";
 
         document.getElementById(
             "etat"
-        ).textContent =
-            "⚠️ Capacité invalide";
+        ).textContent = "⚠️";
 
         return;
     }
@@ -211,7 +223,7 @@ function update() {
         document.getElementById(
             "etat"
         ).textContent =
-            "✅ Niveau déjà atteint";
+            "✅";
 
         sauvegarder();
 
@@ -219,13 +231,17 @@ function update() {
     }
 
     const energie =
+
         ((cible - actuel)
-            * capacite) / 100;
+        * capacite)
+        / 100;
 
     const puissance =
+
         0.69 * amp;
 
     const heures =
+
         energie / puissance;
 
     let h =
@@ -239,16 +255,17 @@ function update() {
     if (min >= 60) {
 
         h++;
-
         min = 0;
     }
 
     document.getElementById(
         "temps"
     ).textContent =
+
         h +
         " h " +
-        String(min).padStart(2, "0") +
+        String(min)
+        .padStart(2, "0") +
         " min";
 
     let etat = "";
@@ -272,9 +289,9 @@ function update() {
     sauvegarder();
 }
 
-/* ==========================
+/* ====================================
    INITIALISATION
-========================== */
+==================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -290,23 +307,29 @@ document.addEventListener(
             );
 
         if (
-            ![8, 10, 12, 14, 16]
-                .includes(ampSauvegarde)
+            !AMPERAGES.includes(
+                ampSauvegarde
+            )
         ) {
 
             ampSauvegarde = 10;
         }
 
-        setAmp(ampSauvegarde);
+        setAmp(
+            ampSauvegarde
+        );
 
     }
 );
 
-/* ==========================
+/* ====================================
    SERVICE WORKER
-========================== */
+==================================== */
 
-if ("serviceWorker" in navigator) {
+if (
+    "serviceWorker"
+    in navigator
+) {
 
     window.addEventListener(
         "load",
@@ -316,20 +339,20 @@ if ("serviceWorker" in navigator) {
 
                 const registration =
                     await navigator
-                        .serviceWorker
-                        .register(
-                            "./service-worker.js"
-                        );
+                    .serviceWorker
+                    .register(
+                        "./service-worker.js"
+                    );
 
                 console.log(
-                    "Service Worker enregistré :",
+                    "SW OK",
                     registration.scope
                 );
 
             } catch (error) {
 
                 console.error(
-                    "Erreur Service Worker :",
+                    "SW KO",
                     error
                 );
 
