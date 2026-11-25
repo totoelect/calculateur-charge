@@ -1,73 +1,16 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-    <meta
-        name="theme-color"
-        content="#007AFF">
-
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes">
-
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="black-translucent">
-
-    <meta
-        name="apple-mobile-web-app-title"
-        content="Charge EV">
-
-    <meta
-        name="description"
-        content="Calculateur de temps de recharge véhicule électrique">
-
-    <title>⚡ Calculateur de Charge</title>
-
-    <link
-        rel="manifest"
-        href="manifest.json">
-
-    <link
-        rel="apple-touch-icon"
-        href="icons/icon-512.png">
-
-    <link
-        rel="stylesheet"
-        href="style.css">
-
-</head>
-
-<body>
-
 <div class="container">
-
-    <!-- Bandeau -->
 
     <div class="vehicle-banner">
 
         <h2>⚡ Calculateur de Charge</h2>
 
-        <p>
-            Temps de recharge véhicule électrique
-        </p>
+        <p>Temps de recharge véhicule électrique</p>
 
     </div>
 
-    <!-- Batterie + Niveaux -->
-
     <div class="card">
 
-        <label for="capacite">
-            🔋 Batterie (kWh)
-        </label>
+        <label>🔋 Batterie (kWh)</label>
 
         <input
             id="capacite"
@@ -77,11 +20,9 @@
             value="46"
             oninput="update()">
 
-        <br><br>
+        <br>
 
-        <label>
-            📉 Niveau actuel
-        </label>
+        <label>📉 Actuel</label>
 
         <div class="controls">
 
@@ -111,11 +52,9 @@
             value="35"
             oninput="update()">
 
-        <br><br>
+        <br>
 
-        <label>
-            🎯 Niveau cible
-        </label>
+        <label>🎯 Cible</label>
 
         <div class="controls">
 
@@ -145,61 +84,35 @@
             value="85"
             oninput="update()">
 
-    </div>
+        <br>
 
-    <!-- Intensité -->
-
-    <div class="card">
-
-        <label>
-            ⚡ Intensité
-        </label>
+        <label>⚡ Intensité</label>
 
         <div class="amp-grid">
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(8)">
-
                 8A
-
             </button>
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(10)">
-
                 10A
-
             </button>
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(12)">
-
                 12A
-
             </button>
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(14)">
-
                 14A
-
             </button>
 
-            <button
-                type="button"
-                class="amp-btn"
+            <button class="amp-btn"
                 onclick="setAmp(16)">
-
                 16A
-
             </button>
 
         </div>
@@ -217,8 +130,6 @@
 
     </div>
 
-    <!-- Résultat -->
-
     <div class="result">
 
         <h2>
@@ -235,16 +146,10 @@
 
         <div id="etat">
 
-            🟢 Charge lente
+            🟢
 
         </div>
 
     </div>
 
 </div>
-
-<script src="app.js"></script>
-
-</body>
-
-</html>
