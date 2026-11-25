@@ -1,386 +1,398 @@
-:root{
+const AMPERAGES = [8, 10, 12, 14, 16];
 
---bg:#061321;
---card:#0F1F33;
+/* ==========================
+   SAUVEGARDE
+========================== */
 
---blue:#007AFF;
---cyan:#00C7BE;
+function sauvegarder() {
 
---text:#FFFFFF;
---text2:#AFC1D3;
+    localStorage.setItem(
+        "capacite",
+        document.getElementById("capacite").value
+    );
 
+    localStorage.setItem(
+        "actuel",
+        document.getElementById("actuel").value
+    );
+
+    localStorage.setItem(
+        "cible",
+        document.getElementById("cible").value
+    );
+
+    localStorage.setItem(
+        "amp",
+        document.getElementById("amp").value
+    );
+
+    localStorage.setItem(
+        "phase",
+        document.getElementById("phase").value
+    );
 }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+/* ==========================
+   CHARGEMENT
+========================== */
+
+function chargerPreferences() {
+
+    const capacite =
+        localStorage.getItem("capacite");
+
+    const actuel =
+        localStorage.getItem("actuel");
+
+    const cible =
+        localStorage.getItem("cible");
+
+    const amp =
+        localStorage.getItem("amp");
+
+    const phase =
+        localStorage.getItem("phase");
+
+    if (capacite !== null)
+        document.getElementById("capacite").value = capacite;
+
+    if (actuel !== null)
+        document.getElementById("actuel").value = actuel;
+
+    if (cible !== null)
+        document.getElementById("cible").value = cible;
+
+    if (amp !== null)
+        document.getElementById("amp").value = amp;
+
+    if (phase !== null)
+        document.getElementById("phase").value = phase;
 }
 
-html,
-body{
+/* ==========================
+   POURCENTAGES
+========================== */
 
-height:100%;
+function changeValue(id, delta) {
+
+    const el =
+        document.getElementById(id);
+
+    let valeur =
+        parseInt(el.value) + delta;
+
+    valeur = Math.max(
+        parseInt(el.min),
+        valeur
+    );
+
+    valeur = Math.min(
+        parseInt(el.max),
+        valeur
+    );
+
+    el.value = valeur;
+
+    update();
 }
 
-body{
+/* ==========================
+   PHASE
+========================== */
 
-font-family:
--apple-system,
-BlinkMacSystemFont,
-sans-serif;
+function setPhase(mode) {
 
-background:
-linear-gradient(
-180deg,
-#04101f,
-#061321
+    document.getElementById(
+        "phase"
+    ).value = mode;
+
+    document
+        .querySelectorAll(".phase-btn")
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "selected"
+            );
+
+        });
+
+    if (mode === "mono") {
+
+        document
+            .querySelectorAll(".phase-btn")[0]
+            .classList.add("selected");
+
+    } else {
+
+        document
+            .querySelectorAll(".phase-btn")[1]
+            .classList.add("selected");
+    }
+
+    update();
+}
+
+/* ==========================
+   AMPERAGE
+========================== */
+
+function setAmp(valeur) {
+
+    if (
+        !AMPERAGES.includes(valeur)
+    ) {
+
+        valeur = 10;
+    }
+
+    document.getElementById(
+        "amp"
+    ).value = valeur;
+
+    document
+        .querySelectorAll(".amp-btn")
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "selected"
+            );
+
+        });
+
+    document
+        .querySelectorAll(".amp-btn")
+        .forEach(btn => {
+
+            if (
+                btn.textContent.trim()
+                === valeur + "A"
+            ) {
+
+                btn.classList.add(
+                    "selected"
+                );
+            }
+
+        });
+
+    update();
+}
+
+/* ==========================
+   CALCUL
+========================== */
+
+function update() {
+
+    const capacite =
+        parseFloat(
+            document.getElementById(
+                "capacite"
+            ).value
+        ) || 45;
+
+    const actuel =
+        parseInt(
+            document.getElementById(
+                "actuel"
+            ).value
+        ) || 0;
+
+    const cible =
+        parseInt(
+            document.getElementById(
+                "cible"
+            ).value
+        ) || 0;
+
+    const amp =
+        parseInt(
+            document.getElementById(
+                "amp"
+            ).value
+        ) || 10;
+
+    const phase =
+        document.getElementById(
+            "phase"
+        ).value || "tri";
+
+    document.getElementById(
+        "actuelValue"
+    ).textContent =
+        actuel + "%";
+
+    document.getElementById(
+        "cibleValue"
+    ).textContent =
+        cible + "%";
+
+    if (capacite <= 0) {
+
+        document.getElementById(
+            "temps"
+        ).textContent = "--";
+
+        document.getElementById(
+            "etat"
+        ).textContent =
+            "⚠️ Capacité invalide";
+
+        return;
+    }
+
+    if (cible <= actuel) {
+
+        document.getElementById(
+            "temps"
+        ).textContent =
+            "0 h 00 min";
+
+        document.getElementById(
+            "etat"
+        ).textContent =
+            "✅ Niveau atteint";
+
+        sauvegarder();
+
+        return;
+    }
+
+    const energie =
+
+        ((cible - actuel)
+        * capacite)
+        / 100;
+
+    let puissance = 0;
+
+    if (phase === "mono") {
+
+        puissance =
+            (230 * amp)
+            / 1000;
+
+    } else {
+
+        puissance =
+            (1.732 * 400 * amp)
+            / 1000;
+    }
+
+    const heures =
+        energie / puissance;
+
+    let h =
+        Math.floor(
+            heures
+        );
+
+    let min =
+        Math.round(
+            (heures - h) * 60
+        );
+
+    if (min >= 60) {
+
+        h++;
+        min = 0;
+    }
+
+    document.getElementById(
+        "temps"
+    ).textContent =
+
+        h +
+        " h " +
+        String(min)
+            .padStart(2, "0") +
+        " min";
+
+    if (phase === "mono") {
+
+        document.getElementById(
+            "etat"
+        ).textContent =
+            "🔵 Monophasé";
+
+    } else {
+
+        document.getElementById(
+            "etat"
+        ).textContent =
+            "🟢 Triphasé";
+    }
+
+    sauvegarder();
+}
+
+/* ==========================
+   INITIALISATION
+========================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        chargerPreferences();
+
+        let ampSauvegarde =
+            parseInt(
+                document.getElementById(
+                    "amp"
+                ).value
+            );
+
+        if (
+            !AMPERAGES.includes(
+                ampSauvegarde
+            )
+        ) {
+
+            ampSauvegarde = 10;
+        }
+
+        setAmp(
+            ampSauvegarde
+        );
+
+        const phaseSauvegardee =
+            document.getElementById(
+                "phase"
+            ).value || "tri";
+
+        setPhase(
+            phaseSauvegardee
+        );
+
+    }
 );
 
-color:white;
+/* ==========================
+   SERVICE WORKER
+========================== */
 
-padding:8px;
-}
+if ("serviceWorker" in navigator) {
 
-/* Container */
+    window.addEventListener(
+        "load",
+        async () => {
 
-.container{
+            try {
 
-max-width:420px;
+                await navigator
+                    .serviceWorker
+                    .register(
+                        "./service-worker.js"
+                    );
 
-margin:auto;
+            } catch (error) {
 
-display:flex;
-flex-direction:column;
+                console.error(
+                    error
+                );
+            }
 
-gap:8px;
-}
-
-/* Bandeau */
-
-.vehicle-banner{
-
-padding:10px;
-
-text-align:center;
-
-border-radius:18px;
-
-background:
-linear-gradient(
-135deg,
-rgba(0,122,255,.25),
-rgba(0,199,190,.15)
-);
-
-border:
-1px solid rgba(0,122,255,.20);
-
-box-shadow:
-0 0 12px
-rgba(0,122,255,.15);
-}
-
-.vehicle-banner h2{
-
-font-size:1.45rem;
-
-font-weight:700;
-
-margin-bottom:2px;
-}
-
-.vehicle-banner p{
-
-font-size:.75rem;
-
-color:var(--text2);
-}
-
-/* Cartes */
-
-.card{
-
-padding:12px;
-
-border-radius:18px;
-
-background:
-rgba(15,31,51,.95);
-
-border:
-1px solid rgba(0,122,255,.10);
-}
-
-/* Labels */
-
-.card label{
-
-display:block;
-
-font-size:.9rem;
-
-font-weight:600;
-
-margin-bottom:6px;
-}
-
-/* Champ capacité */
-
-#capacite{
-
-width:80px;
-
-padding:8px;
-
-background:#102640;
-
-border:none;
-
-border-radius:10px;
-
-color:white;
-
-font-size:18px;
-
-text-align:center;
-}
-
-#capacite:focus{
-
-outline:none;
-}
-
-/* Contrôles */
-
-.controls{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:4px;
-}
-
-.controls span{
-
-font-size:1.8rem;
-
-font-weight:700;
-}
-
-.controls button{
-
-width:46px;
-height:46px;
-
-border:none;
-
-border-radius:50%;
-
-background:
-linear-gradient(
-135deg,
-#007AFF,
-#0057D8
-);
-
-color:white;
-
-font-size:22px;
-
-cursor:pointer;
-}
-
-.controls button:active{
-
-transform:scale(.96);
-}
-
-input[type="range"]{
-
-width:100%;
-
-margin-top:2px;
-
-accent-color:#007AFF;
-}
-
-/* Intensité */
-
-.amp-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(5,1fr);
-
-gap:6px;
-
-margin-top:4px;
-}
-
-.amp-btn{
-
-height:42px;
-
-border:none;
-
-border-radius:12px;
-
-background:
-linear-gradient(
-135deg,
-#183658,
-#214872
-);
-
-color:white;
-
-font-size:14px;
-
-font-weight:700;
-
-cursor:pointer;
-}
-
-.amp-btn.selected{
-
-background:
-linear-gradient(
-135deg,
-#007AFF,
-#00C7BE
-);
-
-box-shadow:
-0 0 10px
-rgba(0,199,190,.55);
-}
-
-/* Résultat */
-
-.result{
-
-padding:16px;
-
-border-radius:18px;
-
-text-align:center;
-
-background:
-linear-gradient(
-135deg,
-#007AFF,
-#00C7BE
-);
-}
-
-.result h2{
-
-font-size:1rem;
-
-margin-bottom:8px;
-}
-
-#temps{
-
-font-size:2.3rem;
-
-font-weight:800;
-
-line-height:1.1;
-
-margin-bottom:6px;
-}
-
-#etat{
-
-font-size:.95rem;
-
-opacity:.95;
-}
-
-/* Ligne séparation */
-
-hr{
-
-opacity:.25;
-}
-
-/* iPhone SE */
-
-@media (max-height:700px){
-
-.vehicle-banner{
-
-padding:8px;
-}
-
-.vehicle-banner h2{
-
-font-size:1.15rem;
-}
-
-.vehicle-banner p{
-
-font-size:.65rem;
-}
-
-.card{
-
-padding:8px;
-}
-
-#capacite{
-
-width:70px;
-
-padding:6px;
-
-font-size:16px;
-}
-
-.controls button{
-
-width:38px;
-height:38px;
-
-font-size:18px;
-}
-
-.controls span{
-
-font-size:1.4rem;
-}
-
-.amp-btn{
-
-height:34px;
-
-font-size:12px;
-}
-
-.result{
-
-padding:12px;
-}
-
-.result h2{
-
-font-size:.85rem;
-}
-
-#temps{
-
-font-size:1.9rem;
-}
-
-#etat{
-
-font-size:.8rem;
-}
-
+        }
+    );
 }
