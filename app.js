@@ -68,7 +68,7 @@ function changeValue(id, delta) {
 }
 
 /* ==========================
-   CALCUL DU TEMPS
+   CALCUL PRINCIPAL
 ========================== */
 
 function update() {
@@ -102,48 +102,85 @@ function update() {
     document.getElementById("ampValue").textContent =
         amp + " A";
 
+    /* Vérifications */
+
+    if (capacite <= 0) {
+
+        document.getElementById("temps").textContent =
+            "--";
+
+        document.getElementById("etat").textContent =
+            "⚠ Capacité invalide";
+
+        return;
+    }
+
     if (cible <= actuel) {
 
         document.getElementById("temps").textContent =
             "0 h 00 min";
 
         document.getElementById("etat").textContent =
-            "✅ Batterie déjà chargée";
+            "✅ Niveau déjà atteint";
 
         sauvegarder();
         return;
     }
 
+    /* Calcul énergie */
+
     const energie =
         ((cible - actuel) * capacite) / 100;
+
+    /* Calcul puissance */
 
     const puissance =
         0.69 * amp;
 
+    /* Calcul temps */
+
     const heures =
         energie / puissance;
 
-    const h =
+    let h =
         Math.floor(heures);
 
-    const min =
-        Math.round((heures - h) * 60);
+    let min =
+        Math.round(
+            (heures - h) * 60
+        );
+
+    /* Correction du cas 60 minutes */
+
+    if (min === 60) {
+
+        h++;
+
+        min = 0;
+    }
 
     document.getElementById("temps").textContent =
-        h + " h " +
+        h +
+        " h " +
         String(min).padStart(2, "0") +
         " min";
 
+    /* Etat de charge */
+
     let etat = "";
 
-    if (amp <= 10)
+    if (amp <= 10) {
+
         etat = "🟢 Charge lente";
 
-    else if (amp <= 16)
+    } else if (amp <= 16) {
+
         etat = "🟡 Charge normale";
 
-    else
+    } else {
+
         etat = "🔴 Charge rapide";
+    }
 
     document.getElementById("etat").textContent =
         etat;
@@ -152,49 +189,43 @@ function update() {
 }
 
 /* ==========================
-   RESET
+   DEMARRAGE
 ========================== */
 
-function resetApp() {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    localStorage.clear();
+        chargerPreferences();
 
-    document.getElementById("capacite").value = 46;
-    document.getElementById("actuel").value = 35;
-    document.getElementById("cible").value = 85;
-    document.getElementById("amp").value = 10;
-
-    update();
-}
+        update();
+    }
+);
 
 /* ==========================
-   INITIALISATION
-========================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    chargerPreferences();
-
-    update();
-
-});
-
-/* ==========================
-   PWA
+   SERVICE WORKER
 ========================== */
 
 if ("serviceWorker" in navigator) {
 
-    window.addEventListener("load", () => {
+    window.addEventListener(
+        "load",
+        () => {
 
-        navigator.serviceWorker
-            .register("service-worker.js")
-            .then(() => {
-                console.log("Service Worker enregistré");
-            })
-            .catch(err => {
-                console.error(err);
-            });
+            navigator.serviceWorker
+                .register("service-worker.js")
+                .then(() => {
 
-    });
+                    console.log(
+                        "Service Worker enregistré"
+                    );
+
+                })
+                .catch(error => {
+
+                    console.error(error);
+
+                });
+        }
+    );
 }
