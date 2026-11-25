@@ -1,39 +1,83 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calculateur de Charge</title>
 
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
 
-<meta name="theme-color" content="#007AFF">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Calculateur de Charge</title>
+
+    <meta
+        name="theme-color"
+        content="#007AFF">
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes">
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1>🔋 Calculateur de Charge</h1>
+    <!-- Bandeau principal -->
 
-    <div class="card">
-        <label>Capacité batterie</label>
-        <input id="capacite" type="number" value="46">
-        <span>kWh</span>
+    <div class="vehicle-banner">
+
+        <h2>⚡ Calculateur de Charge</h2>
+
+        <p>
+            Recharge intelligente véhicule électrique
+        </p>
+
     </div>
 
+    <!-- Batterie -->
+
     <div class="card">
+
+        <label>🔋 Capacité Batterie</label>
+
+        <input
+            id="capacite"
+            type="number"
+            value="46">
+
+    </div>
+
+    <!-- Niveau actuel -->
+
+    <div class="card">
+
         <label>📉 Niveau actuel</label>
 
         <div class="controls">
-            <button onclick="changeValue('actuel',-1)">−</button>
 
-            <span id="actuelValue">35%</span>
+            <button onclick="changeValue('actuel',-1)">
+                −
+            </button>
 
-            <button onclick="changeValue('actuel',1)">+</button>
+            <span id="actuelValue">
+                35%
+            </span>
+
+            <button onclick="changeValue('actuel',1)">
+                +
+            </button>
+
         </div>
 
         <input
@@ -43,17 +87,29 @@
             max="100"
             value="35"
             oninput="update()">
+
     </div>
 
+    <!-- Niveau cible -->
+
     <div class="card">
+
         <label>🎯 Niveau cible</label>
 
         <div class="controls">
-            <button onclick="changeValue('cible',-1)">−</button>
 
-            <span id="cibleValue">85%</span>
+            <button onclick="changeValue('cible',-1)">
+                −
+            </button>
 
-            <button onclick="changeValue('cible',1)">+</button>
+            <span id="cibleValue">
+                85%
+            </span>
+
+            <button onclick="changeValue('cible',1)">
+                +
+            </button>
+
         </div>
 
         <input
@@ -63,37 +119,23 @@
             max="100"
             value="85"
             oninput="update()">
+
     </div>
 
+    <!-- Ampérage -->
+
     <div class="card">
+
         <label>⚡ Ampérage</label>
 
         <div class="controls">
-            <button onclick="changeValue('amp',-1)">−</button>
 
-            <span id="ampValue">10 A</span>
+            <button onclick="changeValue('amp',-1)">
+                −
+            </button>
 
-            <button onclick="changeValue('amp',1)">+</button>
-        </div>
+            <span id="ampValue">
+                10 A
+            </span>
 
-        <input
-            id="amp"
-            type="range"
-            min="8"
-            max="16"
-            value="10"
-            oninput="update()">
-    </div>
-
-    <div class="result">
-        <h2>⏱ Temps estimé</h2>
-        <div id="temps">3 h 20 min</div>
-        <div id="etat"></div>
-    </div>
-
-</div>
-
-<script src="app.js"></script>
-
-</body>
-</html>
+            <button
