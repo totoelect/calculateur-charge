@@ -1,21 +1,26 @@
 {
   "name": "Calculateur de Charge",
-  "short_name": "Charge",
-  "start_url": ".",
+  "short_name": "Charge EV",
+  "description": "Calcul du temps de recharge pour véhicule électrique",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#F2F2F7",
-  "theme_color": "#007AFF",
   "orientation": "portrait",
+  "background_color": "#061321",
+  "theme_color": "#007AFF",
+
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
