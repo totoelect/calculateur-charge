@@ -1,5 +1,5 @@
 /* ==========================
-   SAUVEGARDE LOCALE
+   SAUVEGARDE
 ========================== */
 
 function sauvegarder() {
@@ -26,15 +26,22 @@ function sauvegarder() {
 }
 
 /* ==========================
-   CHARGEMENT DES DONNÉES
+   CHARGEMENT
 ========================== */
 
 function chargerPreferences() {
 
-    const capacite = localStorage.getItem("capacite");
-    const actuel = localStorage.getItem("actuel");
-    const cible = localStorage.getItem("cible");
-    const amp = localStorage.getItem("amp");
+    const capacite =
+        localStorage.getItem("capacite");
+
+    const actuel =
+        localStorage.getItem("actuel");
+
+    const cible =
+        localStorage.getItem("cible");
+
+    const amp =
+        localStorage.getItem("amp");
 
     if (capacite !== null)
         document.getElementById("capacite").value = capacite;
@@ -50,17 +57,26 @@ function chargerPreferences() {
 }
 
 /* ==========================
-   BOUTONS + / -
+   BOUTONS +/- %
 ========================== */
 
 function changeValue(id, delta) {
 
-    const el = document.getElementById(id);
+    const el =
+        document.getElementById(id);
 
-    let valeur = parseInt(el.value) + delta;
+    let valeur =
+        parseInt(el.value) + delta;
 
-    valeur = Math.max(parseInt(el.min), valeur);
-    valeur = Math.min(parseInt(el.max), valeur);
+    valeur = Math.max(
+        parseInt(el.min),
+        valeur
+    );
+
+    valeur = Math.min(
+        parseInt(el.max),
+        valeur
+    );
 
     el.value = valeur;
 
@@ -68,48 +84,106 @@ function changeValue(id, delta) {
 }
 
 /* ==========================
-   CALCUL PRINCIPAL
+   AMPERAGE
+========================== */
+
+function setAmp(valeur) {
+
+    document.getElementById("amp").value =
+        valeur;
+
+    document.getElementById("ampValue")
+        .textContent =
+        valeur + " A";
+
+    document
+        .querySelectorAll(".amp-btn")
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "selected"
+            );
+
+        });
+
+    document
+        .querySelectorAll(".amp-btn")
+        .forEach(btn => {
+
+            if (
+                btn.textContent ===
+                valeur + "A"
+            ) {
+
+                btn.classList.add(
+                    "selected"
+                );
+            }
+
+        });
+
+    update();
+}
+
+/* ==========================
+   CALCUL
 ========================== */
 
 function update() {
 
     const capacite =
         parseFloat(
-            document.getElementById("capacite").value
+            document.getElementById(
+                "capacite"
+            ).value
         ) || 46;
 
     const actuel =
         parseInt(
-            document.getElementById("actuel").value
+            document.getElementById(
+                "actuel"
+            ).value
         ) || 0;
 
     const cible =
         parseInt(
-            document.getElementById("cible").value
+            document.getElementById(
+                "cible"
+            ).value
         ) || 0;
 
     const amp =
         parseInt(
-            document.getElementById("amp").value
-        ) || 6;
+            document.getElementById(
+                "amp"
+            ).value
+        ) || 10;
 
-    document.getElementById("actuelValue").textContent =
+    document.getElementById(
+        "actuelValue"
+    ).textContent =
         actuel + "%";
 
-    document.getElementById("cibleValue").textContent =
+    document.getElementById(
+        "cibleValue"
+    ).textContent =
         cible + "%";
 
-    document.getElementById("ampValue").textContent =
+    document.getElementById(
+        "ampValue"
+    ).textContent =
         amp + " A";
-
-    /* Vérifications */
 
     if (capacite <= 0) {
 
-        document.getElementById("temps").textContent =
+        document.getElementById(
+            "temps"
+        ).textContent =
             "--";
 
-        document.getElementById("etat").textContent =
+        document.getElementById(
+            "etat"
+        ).textContent =
             "⚠ Capacité invalide";
 
         return;
@@ -117,27 +191,27 @@ function update() {
 
     if (cible <= actuel) {
 
-        document.getElementById("temps").textContent =
+        document.getElementById(
+            "temps"
+        ).textContent =
             "0 h 00 min";
 
-        document.getElementById("etat").textContent =
+        document.getElementById(
+            "etat"
+        ).textContent =
             "✅ Niveau déjà atteint";
 
         sauvegarder();
+
         return;
     }
 
-    /* Calcul énergie */
-
     const energie =
-        ((cible - actuel) * capacite) / 100;
-
-    /* Calcul puissance */
+        ((cible - actuel)
+            * capacite) / 100;
 
     const puissance =
         0.69 * amp;
-
-    /* Calcul temps */
 
     const heures =
         energie / puissance;
@@ -150,8 +224,6 @@ function update() {
             (heures - h) * 60
         );
 
-    /* Correction du cas 60 minutes */
-
     if (min === 60) {
 
         h++;
@@ -159,30 +231,35 @@ function update() {
         min = 0;
     }
 
-    document.getElementById("temps").textContent =
+    document.getElementById(
+        "temps"
+    ).textContent =
         h +
         " h " +
         String(min).padStart(2, "0") +
         " min";
 
-    /* Etat de charge */
-
     let etat = "";
 
     if (amp <= 10) {
 
-        etat = "🟢 Charge lente";
+        etat =
+            "🟢 Charge lente";
 
     } else if (amp <= 16) {
 
-        etat = "🟡 Charge normale";
+        etat =
+            "🟡 Charge normale";
 
     } else {
 
-        etat = "🔴 Charge rapide";
+        etat =
+            "🔴 Charge rapide";
     }
 
-    document.getElementById("etat").textContent =
+    document.getElementById(
+        "etat"
+    ).textContent =
         etat;
 
     sauvegarder();
@@ -199,33 +276,37 @@ document.addEventListener(
         chargerPreferences();
 
         update();
+
+        setAmp(
+            parseInt(
+                document.getElementById(
+                    "amp"
+                ).value
+            ) || 10
+        );
+
     }
 );
 
 /* ==========================
-   SERVICE WORKER
+   PWA
 ========================== */
 
-if ("serviceWorker" in navigator) {
+if (
+    "serviceWorker"
+    in navigator
+) {
 
     window.addEventListener(
         "load",
         () => {
 
-            navigator.serviceWorker
-                .register("service-worker.js")
-                .then(() => {
+            navigator
+                .serviceWorker
+                .register(
+                    "service-worker.js"
+                );
 
-                    console.log(
-                        "Service Worker enregistré"
-                    );
-
-                })
-                .catch(error => {
-
-                    console.error(error);
-
-                });
         }
     );
 }
