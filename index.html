@@ -61,11 +61,9 @@ href="style.css">
 
     </div>
 
-    <!-- Carte principale -->
+    <!-- Carte Batterie + Niveaux -->
 
     <div class="card">
-
-        <!-- Batterie -->
 
         <div class="battery-box">
 
@@ -78,21 +76,12 @@ href="style.css">
             <input
                 id="capacite"
                 type="number"
-                min="1"
                 value="45"
                 oninput="update()">
-
-            <span class="battery-unit">
-
-                kWh
-
-            </span>
 
         </div>
 
         <br>
-
-        <!-- Niveau actuel -->
 
         <label>
 
@@ -136,8 +125,6 @@ href="style.css">
 
         <br><br>
 
-        <!-- Niveau cible -->
-
         <label>
 
             🎯 Niveau cible
@@ -180,7 +167,7 @@ href="style.css">
 
     </div>
 
-    <!-- Installation + Intensité + Résultat -->
+    <!-- Installation -->
 
     <div class="card">
 
@@ -217,8 +204,6 @@ href="style.css">
             type="hidden"
             value="tri">
 
-        <br>
-
         <label>
 
             ⚡ Intensité
@@ -227,42 +212,58 @@ href="style.css">
 
         <div class="amp-grid">
 
-            <button class="amp-btn"
+            <button
+                type="button"
+                class="amp-btn"
                 onclick="setAmp(8)">
                 8A
             </button>
 
-            <button class="amp-btn"
+            <button
+                type="button"
+                class="amp-btn"
                 onclick="setAmp(10)">
                 10A
             </button>
 
-            <button class="amp-btn"
+            <button
+                type="button"
+                class="amp-btn"
                 onclick="setAmp(12)">
                 12A
             </button>
 
-            <button class="amp-btn"
+            <button
+                type="button"
+                class="amp-btn"
                 onclick="setAmp(14)">
                 14A
             </button>
 
-            <button class="amp-btn"
+            <button
+                type="button"
+                class="amp-btn"
                 onclick="setAmp(16)">
                 16A
             </button>
 
-            <button class="amp-btn"
+            <button
+                type="button"
+                class="amp-btn"
                 onclick="setAmp(20)">
                 20A
             </button>
 
-            <button class="amp-btn"
+            <button
+                type="button"
+                class="amp-btn"
                 onclick="setAmp(25)">
                 25A
             </button>
 
-            <button class="amp-btn"
+            <button
+                type="button"
+                class="amp-btn"
                 onclick="setAmp(32)">
                 32A
             </button>
@@ -274,32 +275,33 @@ href="style.css">
             type="hidden"
             value="8">
 
-        <hr
-            style="
-            border:none;
-            height:1px;
-            background:rgba(255,255,255,.10);
-            margin:10px 0;">
+    </div>
 
-        <div class="result">
+    <!-- Résultat -->
 
-            <h2>
+    <div class="result">
 
-                ⏱ Temps estimé
+        <h2>
 
-            </h2>
+            ⏱ Temps estimé
 
-            <div id="temps">
+        </h2>
 
-                5 h 23 min
+        <div id="temps">
 
-            </div>
+            0 h 00 min
 
-            <div id="etat">
+        </div>
 
-                ⚡ Charge rapide AC
+        <div id="energie">
 
-            </div>
+            Énergie chargée : 0,0 kWh
+
+        </div>
+
+        <div id="etat">
+
+            ⚡ Charge rapide AC
 
         </div>
 
