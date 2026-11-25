@@ -23,13 +23,21 @@
 
     <meta
         name="apple-mobile-web-app-title"
-        content="Calculateur Charge">
+        content="Charge EV">
 
     <title>⚡ Calculateur de Charge</title>
 
-    <link rel="manifest" href="manifest.json">
+    <link
+        rel="manifest"
+        href="manifest.json">
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="apple-touch-icon"
+        href="icons/icon-512.png">
+
+    <link
+        rel="stylesheet"
+        href="style.css">
 
 </head>
 
@@ -44,17 +52,19 @@
         <h2>⚡ Calculateur de Charge</h2>
 
         <p>
-            Recharge intelligente véhicule électrique
+            Estimation rapide du temps de charge
         </p>
 
     </div>
 
-    <!-- Capacité batterie -->
+    <!-- Batterie -->
 
     <div class="card">
 
         <label for="capacite">
+
             🔋 Capacité batterie (kWh)
+
         </label>
 
         <input
@@ -72,7 +82,9 @@
     <div class="card">
 
         <label>
+
             📉 Niveau actuel
+
         </label>
 
         <div class="controls">
@@ -80,17 +92,23 @@
             <button
                 type="button"
                 onclick="changeValue('actuel',-1)">
+
                 −
+
             </button>
 
             <span id="actuelValue">
+
                 35%
+
             </span>
 
             <button
                 type="button"
                 onclick="changeValue('actuel',1)">
+
                 +
+
             </button>
 
         </div>
@@ -110,7 +128,9 @@
     <div class="card">
 
         <label>
+
             🎯 Niveau cible
+
         </label>
 
         <div class="controls">
@@ -118,17 +138,23 @@
             <button
                 type="button"
                 onclick="changeValue('cible',-1)">
+
                 −
+
             </button>
 
             <span id="cibleValue">
+
                 85%
+
             </span>
 
             <button
                 type="button"
                 onclick="changeValue('cible',1)">
+
                 +
+
             </button>
 
         </div>
@@ -148,7 +174,9 @@
     <div class="card">
 
         <label>
+
             ⚡ Intensité de charge
+
         </label>
 
         <div class="amp-grid">
@@ -157,72 +185,14 @@
                 type="button"
                 class="amp-btn"
                 onclick="setAmp(8)">
+
                 8A
+
             </button>
 
             <button
                 type="button"
                 class="amp-btn"
                 onclick="setAmp(10)">
+
                 10A
-            </button>
-
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(12)">
-                12A
-            </button>
-
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(14)">
-                14A
-            </button>
-
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(16)">
-                16A
-            </button>
-
-        </div>
-
-        <div id="ampValue">
-            10 A
-        </div>
-
-        <input
-            id="amp"
-            type="hidden"
-            value="10">
-
-    </div>
-
-    <!-- Résultat -->
-
-    <div class="result">
-
-        <h2>
-            ⏱ Temps estimé
-        </h2>
-
-        <div id="temps">
-            3 h 20 min
-        </div>
-
-        <div id="etat">
-            🟢 Charge lente
-        </div>
-
-    </div>
-
-</div>
-
-<script src="app.js"></script>
-
-</body>
-
-</html>
