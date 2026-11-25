@@ -103,7 +103,7 @@ body {
 }
 
 /* ==========================
-   CARDS
+   CARTES
 ========================== */
 
 .card {
@@ -181,33 +181,8 @@ body {
         0 0 10px rgba(0,122,255,.5);
 }
 
-.battery-unit {
-
-    margin-top: 4px;
-
-    font-size: .8rem;
-
-    color: var(--text2);
-}
-
-#batteryInfo {
-
-    margin-top: 6px;
-
-    text-align: center;
-
-    font-size: .75rem;
-
-    color: var(--text2);
-}
-
-#batteryInfo.warning {
-
-    color: #FF9F0A;
-}
-
 /* ==========================
-   CONTROLES %
+   NIVEAUX %
 ========================== */
 
 .controls {
@@ -267,7 +242,7 @@ input[type="range"] {
 }
 
 /* ==========================
-   PHASES
+   INSTALLATION
 ========================== */
 
 .phase-grid {
@@ -299,7 +274,7 @@ input[type="range"] {
 }
 
 /* ==========================
-   BOUTONS UNIFORMES
+   BOUTONS HOMOGENES
 ========================== */
 
 .phase-btn,
@@ -369,6 +344,10 @@ input[type="range"] {
             #007AFF,
             #00C7BE
         );
+
+    box-shadow:
+        0 0 15px
+        rgba(0,199,190,.25);
 }
 
 .result h2 {
@@ -380,7 +359,7 @@ input[type="range"] {
 
 #temps {
 
-    font-size: 2.2rem;
+    font-size: 2.3rem;
 
     font-weight: 800;
 
@@ -389,13 +368,26 @@ input[type="range"] {
     margin-bottom: 6px;
 }
 
+#energie {
+
+    font-size: .95rem;
+
+    font-weight: 600;
+
+    margin-top: 4px;
+
+    margin-bottom: 6px;
+
+    opacity: .95;
+}
+
 #etat {
 
     font-size: .9rem;
 }
 
 /* ==========================
-   SEPARATEUR
+   SEPARATEURS
 ========================== */
 
 hr {
@@ -470,6 +462,11 @@ hr {
     #temps {
 
         font-size: 1.8rem;
+    }
+
+    #energie {
+
+        font-size: .75rem;
     }
 
     #etat {
