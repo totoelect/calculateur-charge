@@ -25,6 +25,10 @@
         name="apple-mobile-web-app-title"
         content="Charge EV">
 
+    <meta
+        name="description"
+        content="Calculateur de temps de recharge pour véhicule électrique">
+
     <title>⚡ Calculateur de Charge</title>
 
     <link
@@ -45,14 +49,14 @@
 
 <div class="container">
 
-    <!-- Bandeau principal -->
+    <!-- En-tête -->
 
     <div class="vehicle-banner">
 
         <h2>⚡ Calculateur de Charge</h2>
 
         <p>
-            Estimation rapide du temps de charge
+            Estimation rapide du temps de recharge
         </p>
 
     </div>
@@ -196,3 +200,79 @@
                 onclick="setAmp(10)">
 
                 10A
+
+            </button>
+
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(12)">
+
+                12A
+
+            </button>
+
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(14)">
+
+                14A
+
+            </button>
+
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(16)">
+
+                16A
+
+            </button>
+
+        </div>
+
+        <div id="ampValue">
+
+            10 A
+
+        </div>
+
+        <input
+            id="amp"
+            type="hidden"
+            value="10">
+
+    </div>
+
+    <!-- Résultat -->
+
+    <div class="result">
+
+        <h2>
+
+            ⏱ Temps estimé
+
+        </h2>
+
+        <div id="temps">
+
+            3 h 20 min
+
+        </div>
+
+        <div id="etat">
+
+            🟢 Charge lente
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
