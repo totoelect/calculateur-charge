@@ -1,63 +1,297 @@
-body{
+:root{
+
+    --bg:#061321;
+    --bg2:#091b2f;
+
+    --card:rgba(15,31,51,.85);
+
+    --blue:#007AFF;
+    --cyan:#00C7BE;
+
+    --green:#30D158;
+    --orange:#FF9F0A;
+    --red:#FF453A;
+
+    --text:#FFFFFF;
+    --text2:#B8C5D6;
+}
+
+*{
+    box-sizing:border-box;
     margin:0;
-    background:#F2F2F7;
+    padding:0;
+}
+
+body{
+
+    min-height:100vh;
+
     font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    background:
+    radial-gradient(circle at top right,#0b3d91 0%,transparent 35%),
+    radial-gradient(circle at bottom left,#004d61 0%,transparent 30%),
+    linear-gradient(180deg,var(--bg),#030b15);
+
+    color:var(--text);
+
+    padding:20px;
 }
 
 .container{
+
     max-width:500px;
+
     margin:auto;
-    padding:15px;
 }
 
 h1{
+
     text-align:center;
-    color:#007AFF;
+
+    color:white;
+
+    font-size:2rem;
+
+    margin-bottom:20px;
+
+    text-shadow:
+    0 0 12px rgba(0,122,255,.7);
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:var(--text2);
+
+    margin-bottom:25px;
 }
 
 .card{
-    background:white;
-    border-radius:20px;
+
+    background:var(--card);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:24px;
+
+    border:1px solid rgba(0,122,255,.15);
+
     padding:20px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+    0 0 25px rgba(0,122,255,.12);
+
+}
+
+.card label{
+
+    display:block;
+
+    font-size:1rem;
+
     margin-bottom:15px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    color:#d8e5f4;
 }
 
 .controls{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:15px 0;
-}
 
-button{
-    width:60px;
-    height:60px;
-    border:none;
-    border-radius:30px;
-    background:#007AFF;
-    color:white;
-    font-size:32px;
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
 }
 
 .controls span{
-    font-size:28px;
-    font-weight:bold;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:white;
 }
 
-input[type="range"]{
+button{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    border:none;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+    135deg,
+    #0086ff,
+    #0060df
+    );
+
+    color:white;
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 0 15px rgba(0,122,255,.45);
+
+    transition:.2s;
+}
+
+button:active{
+
+    transform:scale(.95);
+}
+
+input[type=range]{
+
     width:100%;
+
+    accent-color:#007AFF;
+}
+
+input[type=number]{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    border:none;
+
+    background:#102640;
+
+    color:white;
+
+    font-size:18px;
 }
 
 .result{
+
+    border-radius:30px;
+
+    padding:30px;
+
     text-align:center;
-    background:#34C759;
-    color:white;
-    border-radius:20px;
-    padding:20px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #007AFF,
+    #00C7BE
+    );
+
+    box-shadow:
+    0 0 30px rgba(0,199,190,.4);
+
+    margin-top:25px;
+}
+
+.result h2{
+
+    margin-bottom:15px;
+
+    font-size:1.3rem;
 }
 
 #temps{
-    font-size:42px;
+
+    font-size:3rem;
+
     font-weight:bold;
+
+    line-height:1.2;
+
+    text-shadow:
+    0 0 20px rgba(255,255,255,.3);
+}
+
+#etat{
+
+    margin-top:15px;
+
+    font-size:1.1rem;
+
+    font-weight:600;
+}
+
+.reset-btn{
+
+    width:100%;
+
+    height:60px;
+
+    border-radius:18px;
+
+    font-size:18px;
+
+    margin-top:20px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #1d3557,
+    #274c77
+    );
+}
+
+.vehicle-banner{
+
+    background:
+    linear-gradient(
+    135deg,
+    rgba(0,122,255,.1),
+    rgba(0,199,190,.1)
+    );
+
+    border-radius:28px;
+
+    padding:20px;
+
+    text-align:center;
+
+    margin-bottom:20px;
+}
+
+.vehicle-banner h2{
+
+    font-size:2rem;
+
+    color:white;
+}
+
+.vehicle-banner p{
+
+    margin-top:5px;
+
+    color:#9ecbff;
+}
+
+@media(max-width:480px){
+
+    h1{
+        font-size:1.7rem;
+    }
+
+    #temps{
+        font-size:2.5rem;
+    }
+
+    button{
+
+        width:60px;
+        height:60px;
+    }
 }
