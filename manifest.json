@@ -1,13 +1,24 @@
 {
+  "id": "/",
   "name": "Calculateur de Charge",
   "short_name": "Charge EV",
-  "description": "Calcul du temps de recharge pour véhicule électrique",
+  "description": "Calculateur de temps de recharge pour véhicule électrique en monophasé et triphasé.",
+
+  "lang": "fr",
   "start_url": "./",
   "scope": "./",
+
   "display": "standalone",
   "orientation": "portrait",
+
   "background_color": "#061321",
   "theme_color": "#007AFF",
+
+  "categories": [
+    "utilities",
+    "productivity",
+    "auto"
+  ],
 
   "icons": [
     {
