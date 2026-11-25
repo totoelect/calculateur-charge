@@ -1,8 +1,21 @@
-const AMPERAGES = [8, 10, 12, 14, 16];
+/* ==================================
+   CONFIGURATION
+================================== */
 
-/* ==========================
+const AMPERAGES = [
+    8,
+    10,
+    12,
+    14,
+    16,
+    20,
+    25,
+    32
+];
+
+/* ==================================
    SAUVEGARDE
-========================== */
+================================== */
 
 function sauvegarder() {
 
@@ -32,9 +45,9 @@ function sauvegarder() {
     );
 }
 
-/* ==========================
+/* ==================================
    CHARGEMENT
-========================== */
+================================== */
 
 function chargerPreferences() {
 
@@ -69,9 +82,9 @@ function chargerPreferences() {
         document.getElementById("phase").value = phase;
 }
 
-/* ==========================
-   POURCENTAGES
-========================== */
+/* ==================================
+   BOUTONS + / -
+================================== */
 
 function changeValue(id, delta) {
 
@@ -96,9 +109,9 @@ function changeValue(id, delta) {
     update();
 }
 
-/* ==========================
+/* ==================================
    PHASE
-========================== */
+================================== */
 
 function setPhase(mode) {
 
@@ -132,9 +145,9 @@ function setPhase(mode) {
     update();
 }
 
-/* ==========================
+/* ==================================
    AMPERAGE
-========================== */
+================================== */
 
 function setAmp(valeur) {
 
@@ -164,8 +177,8 @@ function setAmp(valeur) {
         .forEach(btn => {
 
             if (
-                btn.textContent.trim()
-                === valeur + "A"
+                btn.textContent.trim() ===
+                valeur + "A"
             ) {
 
                 btn.classList.add(
@@ -178,18 +191,23 @@ function setAmp(valeur) {
     update();
 }
 
-/* ==========================
+/* ==================================
    CALCUL
-========================== */
+================================== */
 
 function update() {
 
-    const capacite =
+    let capacite =
         parseFloat(
             document.getElementById(
                 "capacite"
             ).value
-        ) || 45;
+        );
+
+    if (isNaN(capacite)) {
+
+        capacite = 45;
+    }
 
     const actuel =
         parseInt(
@@ -227,18 +245,41 @@ function update() {
     ).textContent =
         cible + "%";
 
-    if (capacite <= 0) {
-
+    const batteryInfo =
         document.getElementById(
-            "temps"
-        ).textContent = "--";
+            "batteryInfo"
+        );
 
-        document.getElementById(
-            "etat"
-        ).textContent =
-            "⚠️ Capacité invalide";
+    if (batteryInfo) {
 
-        return;
+        batteryInfo.classList.remove(
+            "warning",
+            "error"
+        );
+
+        if (capacite < 10) {
+
+            batteryInfo.textContent =
+                "⚠️ Batterie inhabituellement faible";
+
+            batteryInfo.classList.add(
+                "warning"
+            );
+
+        } else if (capacite > 150) {
+
+            batteryInfo.textContent =
+                "⚠️ Batterie inhabituellement élevée";
+
+            batteryInfo.classList.add(
+                "warning"
+            );
+
+        } else {
+
+            batteryInfo.textContent =
+                capacite + " kWh";
+        }
     }
 
     if (cible <= actuel) {
@@ -289,7 +330,8 @@ function update() {
 
     let min =
         Math.round(
-            (heures - h) * 60
+            (heures - h)
+            * 60
         );
 
     if (min >= 60) {
@@ -305,30 +347,43 @@ function update() {
         h +
         " h " +
         String(min)
-            .padStart(2, "0") +
+            .padStart(
+                2,
+                "0"
+            ) +
         " min";
 
-    if (phase === "mono") {
+    let etat = "";
 
-        document.getElementById(
-            "etat"
-        ).textContent =
-            "🔵 Monophasé";
+    if (puissance < 4) {
+
+        etat =
+            "🟢 Charge lente";
+
+    } else if (
+        puissance < 11
+    ) {
+
+        etat =
+            "🟡 Charge accélérée";
 
     } else {
 
-        document.getElementById(
-            "etat"
-        ).textContent =
-            "🟢 Triphasé";
+        etat =
+            "⚡ Charge rapide AC";
     }
+
+    document.getElementById(
+        "etat"
+    ).textContent =
+        etat;
 
     sauvegarder();
 }
 
-/* ==========================
+/* ==================================
    INITIALISATION
-========================== */
+================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -368,11 +423,13 @@ document.addEventListener(
     }
 );
 
-/* ==========================
+/* ==================================
    SERVICE WORKER
-========================== */
+================================== */
 
-if ("serviceWorker" in navigator) {
+if (
+    "serviceWorker" in navigator
+) {
 
     window.addEventListener(
         "load",
@@ -391,6 +448,7 @@ if ("serviceWorker" in navigator) {
                 console.error(
                     error
                 );
+
             }
 
         }
