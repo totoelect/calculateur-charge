@@ -1,36 +1,26 @@
 /* ====================================
-   CACHE
+   CONFIGURATION
 ==================================== */
 
-const CACHE_NAME = "charge-ev-v5";
+const CACHE_NAME = "charge-ev-v6";
 
-/* Récupère automatiquement le dossier
-   GitHub Pages courant */
+const APP_FILES = [
 
-const BASE_PATH =
-    self.location.pathname
-        .replace(
-            "/service-worker.js",
-            ""
-        );
+    "./",
+    "./index.html",
+    "./style.css",
+    "./app.js",
 
-const FILES_TO_CACHE = [
+    "./manifest.json",
+    "./offline.html",
 
-    BASE_PATH + "/",
-    BASE_PATH + "/index.html",
-    BASE_PATH + "/style.css",
-    BASE_PATH + "/app.js",
-
-    BASE_PATH + "/manifest.json",
-    BASE_PATH + "/offline.html",
-
-    BASE_PATH + "/icons/icon-192.png",
-    BASE_PATH + "/icons/icon-512.png"
+    "./icons/icon-192.png",
+    "./icons/icon-512.png"
 
 ];
 
 /* ====================================
-   INSTALL
+   INSTALLATION
 ==================================== */
 
 self.addEventListener(
@@ -41,10 +31,11 @@ self.addEventListener(
 
             caches
                 .open(CACHE_NAME)
+
                 .then(cache => {
 
                     return cache.addAll(
-                        FILES_TO_CACHE
+                        APP_FILES
                     );
 
                 })
@@ -57,7 +48,7 @@ self.addEventListener(
 );
 
 /* ====================================
-   ACTIVATE
+   ACTIVATION
 ==================================== */
 
 self.addEventListener(
@@ -106,27 +97,8 @@ self.addEventListener(
     event => {
 
         if (
-            event.request.mode ===
-            "navigate"
+            event.request.method !== "GET"
         ) {
-
-            event.respondWith(
-
-                fetch(
-                    event.request
-                )
-
-                .catch(() => {
-
-                    return caches.match(
-                        BASE_PATH +
-                        "/offline.html"
-                    );
-
-                })
-
-            );
-
             return;
         }
 
@@ -136,11 +108,13 @@ self.addEventListener(
                 event.request
             )
 
-            .then(response => {
+            .then(cacheResponse => {
 
-                if (response) {
+                if (
+                    cacheResponse
+                ) {
 
-                    return response;
+                    return cacheResponse;
                 }
 
                 return fetch(
@@ -149,20 +123,45 @@ self.addEventListener(
 
                 .then(networkResponse => {
 
-                    caches.open(
-                        CACHE_NAME
-                    )
+                    if (
+                        !networkResponse ||
+                        networkResponse.status !== 200
+                    ) {
 
-                    .then(cache => {
+                        return networkResponse;
+                    }
 
-                        cache.put(
-                            event.request,
-                            networkResponse.clone()
-                        );
+                    const responseClone =
+                        networkResponse.clone();
 
-                    });
+                    caches
+                        .open(CACHE_NAME)
+
+                        .then(cache => {
+
+                            cache.put(
+                                event.request,
+                                responseClone
+                            );
+
+                        });
 
                     return networkResponse;
+
+                })
+
+                .catch(() => {
+
+                    if (
+                        event.request.mode ===
+                        "navigate"
+                    ) {
+
+                        return caches.match(
+                            "./offline.html"
+                        );
+
+                    }
 
                 });
 
@@ -174,7 +173,7 @@ self.addEventListener(
 );
 
 /* ====================================
-   UPDATE
+   MISE A JOUR
 ==================================== */
 
 self.addEventListener(
