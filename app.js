@@ -57,7 +57,7 @@ function chargerPreferences() {
 }
 
 /* ==========================
-   BOUTONS +/- %
+   NIVEAUX %
 ========================== */
 
 function changeValue(id, delta) {
@@ -89,12 +89,9 @@ function changeValue(id, delta) {
 
 function setAmp(valeur) {
 
-    document.getElementById("amp").value =
-        valeur;
-
-    document.getElementById("ampValue")
-        .textContent =
-        valeur + " A";
+    document
+        .getElementById("amp")
+        .value = valeur;
 
     document
         .querySelectorAll(".amp-btn")
@@ -110,16 +107,15 @@ function setAmp(valeur) {
         .querySelectorAll(".amp-btn")
         .forEach(btn => {
 
-            if (
-                btn.textContent ===
-                valeur + "A"
-            ) {
+            const texte =
+                btn.textContent.trim();
+
+            if (texte === valeur + "A") {
 
                 btn.classList.add(
                     "selected"
                 );
             }
-
         });
 
     update();
@@ -169,10 +165,16 @@ function update() {
     ).textContent =
         cible + "%";
 
-    document.getElementById(
-        "ampValue"
-    ).textContent =
-        amp + " A";
+    const ampValue =
+        document.getElementById(
+            "ampValue"
+        );
+
+    if (ampValue) {
+
+        ampValue.textContent =
+            amp + " A";
+    }
 
     if (capacite <= 0) {
 
@@ -184,129 +186,11 @@ function update() {
         document.getElementById(
             "etat"
         ).textContent =
-            "⚠ Capacité invalide";
+            "⚠️ Capacité invalide";
 
         return;
     }
 
     if (cible <= actuel) {
 
-        document.getElementById(
-            "temps"
-        ).textContent =
-            "0 h 00 min";
-
-        document.getElementById(
-            "etat"
-        ).textContent =
-            "✅ Niveau déjà atteint";
-
-        sauvegarder();
-
-        return;
-    }
-
-    const energie =
-        ((cible - actuel)
-            * capacite) / 100;
-
-    const puissance =
-        0.69 * amp;
-
-    const heures =
-        energie / puissance;
-
-    let h =
-        Math.floor(heures);
-
-    let min =
-        Math.round(
-            (heures - h) * 60
-        );
-
-    if (min === 60) {
-
-        h++;
-
-        min = 0;
-    }
-
-    document.getElementById(
-        "temps"
-    ).textContent =
-        h +
-        " h " +
-        String(min).padStart(2, "0") +
-        " min";
-
-    let etat = "";
-
-    if (amp <= 10) {
-
-        etat =
-            "🟢 Charge lente";
-
-    } else if (amp <= 16) {
-
-        etat =
-            "🟡 Charge normale";
-
-    } else {
-
-        etat =
-            "🔴 Charge rapide";
-    }
-
-    document.getElementById(
-        "etat"
-    ).textContent =
-        etat;
-
-    sauvegarder();
-}
-
-/* ==========================
-   DEMARRAGE
-========================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        chargerPreferences();
-
-        update();
-
-        setAmp(
-            parseInt(
-                document.getElementById(
-                    "amp"
-                ).value
-            ) || 10
-        );
-
-    }
-);
-
-/* ==========================
-   PWA
-========================== */
-
-if (
-    "serviceWorker"
-    in navigator
-) {
-
-    window.addEventListener(
-        "load",
-        () => {
-
-            navigator
-                .serviceWorker
-                .register(
-                    "service-worker.js"
-                );
-
-        }
-    );
-}
+        document.getElementById
