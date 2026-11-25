@@ -10,7 +10,7 @@
 --orange:#FF9F0A;
 
 --text:#FFFFFF;
---text2:#B8C5D6;
+--text2:#AFC1D3;
 
 }
 
@@ -21,8 +21,6 @@ box-sizing:border-box;
 }
 
 body{
-
-min-height:100vh;
 
 font-family:
 -apple-system,
@@ -38,110 +36,103 @@ linear-gradient(
 
 color:white;
 
-padding:20px;
+height:100vh;
+overflow:hidden;
+
+padding:10px;
 }
 
 .container{
 
-max-width:500px;
-
+max-width:480px;
 margin:auto;
+
+height:100%;
+
+display:flex;
+flex-direction:column;
+gap:8px;
 }
 
+/* En-tête */
+
 .vehicle-banner{
+
+padding:10px;
+
+border-radius:18px;
+
+text-align:center;
 
 background:
 linear-gradient(
 135deg,
-rgba(0,122,255,.20),
+rgba(0,122,255,.2),
 rgba(0,199,190,.15)
 );
 
-border-radius:28px;
-
-padding:24px;
-
-text-align:center;
-
-margin-bottom:20px;
-
 border:
-1px solid
-rgba(0,122,255,.25);
-
-backdrop-filter:blur(20px);
-
-box-shadow:
-0 0 25px
-rgba(0,122,255,.15);
+1px solid rgba(0,122,255,.2);
 }
 
 .vehicle-banner h2{
 
-font-size:2rem;
-
-margin-bottom:8px;
+font-size:1.3rem;
 }
 
 .vehicle-banner p{
 
+font-size:.8rem;
+
 color:var(--text2);
 }
+
+/* Cartes */
 
 .card{
 
 background:
-rgba(15,31,51,.90);
+rgba(15,31,51,.92);
 
-border-radius:24px;
+border-radius:18px;
 
-padding:20px;
-
-margin-bottom:18px;
+padding:10px;
 
 border:
-1px solid
-rgba(0,122,255,.10);
-
-box-shadow:
-0 0 20px
-rgba(0,122,255,.08);
+1px solid rgba(0,122,255,.12);
 }
 
 .card label{
 
 display:block;
 
-font-weight:600;
+font-size:.9rem;
 
-margin-bottom:12px;
+margin-bottom:6px;
+
+font-weight:600;
 }
 
-input[type=number]{
+/* batterie */
+
+#capacite{
 
 width:100%;
 
-padding:16px;
+padding:10px;
 
 border:none;
 
-border-radius:16px;
+border-radius:12px;
 
 background:#102640;
 
 color:white;
 
-font-size:20px;
+font-size:1rem;
 }
 
-input[type=number]:focus{
-
-outline:none;
-
-box-shadow:
-0 0 8px
-rgba(0,122,255,.6);
-}
+/* sliders */
 
 .controls{
 
@@ -150,19 +141,21 @@ display:flex;
 justify-content:space-between;
 
 align-items:center;
+
+margin-bottom:6px;
 }
 
 .controls span{
 
-font-size:2rem;
+font-size:1.5rem;
 
 font-weight:bold;
 }
 
 .controls button{
 
-width:70px;
-height:70px;
+width:44px;
+height:44px;
 
 border:none;
 
@@ -177,52 +170,37 @@ linear-gradient(
 
 color:white;
 
-font-size:32px;
-
-cursor:pointer;
-
-box-shadow:
-0 0 12px
-rgba(0,122,255,.45);
-
-transition:.2s;
-}
-
-.controls button:active{
-
-transform:scale(.95);
+font-size:22px;
 }
 
 input[type=range]{
 
 width:100%;
 
-margin-top:15px;
-
 accent-color:#007AFF;
 }
 
-/* Intensité */
+/* ampérage */
 
 .amp-grid{
 
 display:grid;
 
 grid-template-columns:
-repeat(3,1fr);
+repeat(5,1fr);
 
-gap:12px;
+gap:6px;
 
-margin-top:10px;
+margin-top:6px;
 }
 
 .amp-btn{
 
-height:65px;
+height:42px;
 
 border:none;
 
-border-radius:18px;
+border-radius:12px;
 
 background:
 linear-gradient(
@@ -233,13 +211,9 @@ linear-gradient(
 
 color:white;
 
-font-size:22px;
+font-size:15px;
 
 font-weight:bold;
-
-cursor:pointer;
-
-transition:.2s;
 }
 
 .amp-btn.selected{
@@ -252,19 +226,17 @@ linear-gradient(
 );
 
 box-shadow:
-0 0 18px
+0 0 10px
 rgba(0,199,190,.5);
-
-transform:scale(1.03);
 }
 
 #ampValue{
 
-margin-top:15px;
-
 text-align:center;
 
-font-size:28px;
+margin-top:6px;
+
+font-size:1.2rem;
 
 font-weight:bold;
 }
@@ -273,11 +245,9 @@ font-weight:bold;
 
 .result{
 
-margin-top:25px;
+padding:16px;
 
-padding:30px;
-
-border-radius:30px;
+border-radius:20px;
 
 text-align:center;
 
@@ -288,63 +258,26 @@ linear-gradient(
 #00C7BE
 );
 
-box-shadow:
-0 0 30px
-rgba(0,199,190,.35);
+margin-top:auto;
 }
 
 .result h2{
 
-margin-bottom:15px;
+font-size:1rem;
+
+margin-bottom:8px;
 }
 
 #temps{
 
-font-size:3rem;
+font-size:2rem;
 
 font-weight:800;
-
-line-height:1.2;
 }
 
 #etat{
 
-margin-top:12px;
+margin-top:5px;
 
-font-size:1.2rem;
-
-font-weight:600;
-}
-
-/* Responsive */
-
-@media(max-width:480px){
-
-.container{
-
-padding-bottom:20px;
-}
-
-.vehicle-banner h2{
-
-font-size:1.7rem;
-}
-
-#temps{
-
-font-size:2.5rem;
-}
-
-.controls button{
-
-width:60px;
-height:60px;
-}
-
-.amp-btn{
-
-height:60px;
-font-size:20px;
-}
-
+font-size:.9rem;
 }
