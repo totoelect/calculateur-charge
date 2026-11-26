@@ -22,6 +22,7 @@
 
 html,
 body {
+
     min-height: 100%;
 }
 
@@ -41,7 +42,9 @@ body {
 
     color: white;
 
-    padding: 8px;
+    padding: 4px;
+
+    overflow-y: auto;
 }
 
 /* ==========================
@@ -58,6 +61,8 @@ body {
     flex-direction: column;
 
     gap: 8px;
+
+    padding-bottom: 10px;
 }
 
 /* ==========================
@@ -66,7 +71,7 @@ body {
 
 .vehicle-banner {
 
-    padding: 10px;
+    padding: 8px;
 
     border-radius: 18px;
 
@@ -81,23 +86,18 @@ body {
 
     border:
         1px solid rgba(0,122,255,.20);
-
-    box-shadow:
-        0 0 12px rgba(0,122,255,.15);
 }
 
 .vehicle-banner h2 {
 
-    font-size: 1.35rem;
+    font-size: 1.25rem;
 
     font-weight: 700;
-
-    margin-bottom: 3px;
 }
 
 .vehicle-banner p {
 
-    font-size: .75rem;
+    font-size: .70rem;
 
     color: var(--text2);
 }
@@ -108,7 +108,7 @@ body {
 
 .card {
 
-    padding: 12px;
+    padding: 8px;
 
     border-radius: 18px;
 
@@ -117,6 +117,8 @@ body {
 
     border:
         1px solid rgba(0,122,255,.12);
+
+    overflow: visible;
 }
 
 .card label {
@@ -131,6 +133,58 @@ body {
 }
 
 /* ==========================
+   RESULTAT
+========================== */
+
+.result {
+
+    padding: 10px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1C86F2,
+            #10C8C8
+        );
+}
+
+.result h2 {
+
+    font-size: 1rem;
+
+    margin-bottom: 4px;
+}
+
+#temps {
+
+    font-size: 2rem;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    margin-bottom: 4px;
+}
+
+#energie {
+
+    font-size: .85rem;
+
+    font-weight: 600;
+
+    margin-bottom: 4px;
+}
+
+#etat {
+
+    font-size: .9rem;
+}
+
+/* ==========================
    BATTERIE
 ========================== */
 
@@ -141,22 +195,13 @@ body {
     flex-direction: column;
 
     align-items: center;
-
-    justify-content: center;
-}
-
-.battery-box label {
-
-    text-align: center;
-
-    margin-bottom: 6px;
 }
 
 #capacite {
 
     width: 90px;
 
-    padding: 8px;
+    height: 42px;
 
     border: none;
 
@@ -166,23 +211,15 @@ body {
 
     color: white;
 
-    font-size: 20px;
+    text-align: center;
+
+    font-size: 18px;
 
     font-weight: 700;
-
-    text-align: center;
-}
-
-#capacite:focus {
-
-    outline: none;
-
-    box-shadow:
-        0 0 10px rgba(0,122,255,.5);
 }
 
 /* ==========================
-   NIVEAUX %
+   CONTROLES %
 ========================== */
 
 .controls {
@@ -192,22 +229,20 @@ body {
     justify-content: space-between;
 
     align-items: center;
-
-    margin-bottom: 4px;
 }
 
 .controls span {
 
-    font-size: 1.7rem;
+    font-size: 1.3rem;
 
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .controls button {
 
-    width: 46px;
+    width: 40px;
 
-    height: 46px;
+    height: 40px;
 
     border: none;
 
@@ -222,27 +257,20 @@ body {
 
     color: white;
 
-    font-size: 22px;
-
-    cursor: pointer;
-
-    transition: .15s;
-}
-
-.controls button:active {
-
-    transform: scale(.96);
+    font-size: 20px;
 }
 
 input[type="range"] {
 
     width: 100%;
 
+    margin-top: 4px;
+
     accent-color: #007AFF;
 }
 
 /* ==========================
-   INSTALLATION
+   GRILLE PHASES
 ========================== */
 
 .phase-grid {
@@ -258,7 +286,7 @@ input[type="range"] {
 }
 
 /* ==========================
-   AMPERAGES
+   GRILLE AMPERAGE
 ========================== */
 
 .amp-grid {
@@ -266,15 +294,17 @@ input[type="range"] {
     display: grid;
 
     grid-template-columns:
-        repeat(4,1fr);
+        repeat(4,minmax(0,1fr));
 
-    gap: 6px;
+    gap: 4px;
 
-    margin-top: 4px;
+    margin-top: 6px;
+
+    width: 100%;
 }
 
 /* ==========================
-   BOUTONS HOMOGENES
+   BOUTONS
 ========================== */
 
 .phase-btn,
@@ -282,11 +312,11 @@ input[type="range"] {
 
     width: 100%;
 
-    height: 42px;
+    height: 34px;
 
     border: none;
 
-    border-radius: 12px;
+    border-radius: 10px;
 
     background:
         linear-gradient(
@@ -297,13 +327,11 @@ input[type="range"] {
 
     color: white;
 
-    font-size: 14px;
+    font-size: 12px;
 
     font-weight: 700;
 
     cursor: pointer;
-
-    transition: .15s;
 }
 
 .phase-btn.selected,
@@ -317,151 +345,38 @@ input[type="range"] {
         );
 
     box-shadow:
-        0 0 10px rgba(0,199,190,.55);
-}
-
-.phase-btn:active,
-.amp-btn:active {
-
-    transform: scale(.96);
+        0 0 8px
+        rgba(0,199,190,.45);
 }
 
 /* ==========================
-   RESULTAT
+   MOBILE
 ========================== */
 
-.result {
-
-    padding: 14px;
-
-    border-radius: 18px;
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #007AFF,
-            #00C7BE
-        );
-
-    box-shadow:
-        0 0 15px
-        rgba(0,199,190,.25);
-}
-
-.result h2 {
-
-    font-size: 1rem;
-
-    margin-bottom: 8px;
-}
-
-#temps {
-
-    font-size: 2.3rem;
-
-    font-weight: 800;
-
-    line-height: 1.1;
-
-    margin-bottom: 6px;
-}
-
-#energie {
-
-    font-size: .95rem;
-
-    font-weight: 600;
-
-    margin-top: 4px;
-
-    margin-bottom: 6px;
-
-    opacity: .95;
-}
-
-#etat {
-
-    font-size: .9rem;
-}
-
-/* ==========================
-   SEPARATEURS
-========================== */
-
-hr {
-
-    border: none;
-
-    height: 1px;
-
-    background:
-        rgba(255,255,255,.10);
-}
-
-/* ==========================
-   IPHONE SE
-========================== */
-
-@media (max-height: 700px) {
+@media (max-height:700px) {
 
     .vehicle-banner {
-
-        padding: 8px;
+        padding: 6px;
     }
 
     .vehicle-banner h2 {
-
-        font-size: 1.15rem;
-    }
-
-    .vehicle-banner p {
-
-        font-size: .65rem;
+        font-size: 1.10rem;
     }
 
     .card {
-
-        padding: 8px;
+        padding: 6px;
     }
 
-    #capacite {
-
-        width: 80px;
-
-        font-size: 18px;
-    }
-
-    .controls button {
-
-        width: 40px;
-        height: 40px;
-
-        font-size: 18px;
-    }
-
-    .controls span {
-
-        font-size: 1.4rem;
+    #temps {
+        font-size: 1.8rem;
     }
 
     .phase-btn,
     .amp-btn {
 
-        height: 36px;
+        height: 32px;
 
-        font-size: 12px;
-    }
-
-    .result {
-
-        padding: 10px;
-    }
-
-    #temps {
-
-        font-size: 1.8rem;
+        font-size: 11px;
     }
 
     #energie {
@@ -471,6 +386,6 @@ hr {
 
     #etat {
 
-        font-size: .8rem;
+        font-size: .75rem;
     }
 }
