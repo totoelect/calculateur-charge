@@ -14,10 +14,6 @@ name="theme-color"
 content="#007AFF">
 
 <meta
-name="mobile-web-app-capable"
-content="yes">
-
-<meta
 name="apple-mobile-web-app-capable"
 content="yes">
 
@@ -35,15 +31,7 @@ content="Calculateur de temps de recharge véhicule électrique">
 
 <title>⚡ Calculateur de Charge</title>
 
-<link
-rel="manifest"
-href="manifest.json">
-
-<link
-rel="icon"
-type="image/png"
-sizes="192x192"
-href="icons/icon-192.png">
+<link rel="manifest" href="manifest.json">
 
 <link
 rel="apple-touch-icon"
@@ -71,7 +59,37 @@ href="style.css">
 
     </div>
 
-    <!-- Carte Batterie + Niveaux -->
+    <!-- Résultat -->
+
+    <div class="result">
+
+        <h2>
+
+            ⏱ Temps estimé
+
+        </h2>
+
+        <div id="temps">
+
+            0 h 00 min
+
+        </div>
+
+        <div id="energie">
+
+            Énergie chargée : 0,0 kWh
+
+        </div>
+
+        <div id="etat">
+
+            ⚡ Charge rapide AC
+
+        </div>
+
+    </div>
+
+    <!-- Batterie + Niveaux -->
 
     <div class="card">
 
@@ -177,7 +195,7 @@ href="style.css">
 
     </div>
 
-    <!-- Installation -->
+    <!-- Installation + Intensité -->
 
     <div class="card">
 
@@ -222,105 +240,9 @@ href="style.css">
 
         <div class="amp-grid">
 
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(8)">
-                8A
-            </button>
+            <button class="amp-btn" onclick="setAmp(8)">8A</button>
+            <button class="amp-btn" onclick="setAmp(10)">10A</button>
+            <button class="amp-btn" onclick="setAmp(12)">12A</button>
+            <button class="amp-btn" onclick="setAmp(14)">14A</button>
 
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(10)">
-                10A
-            </button>
-
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(12)">
-                12A
-            </button>
-
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(14)">
-                14A
-            </button>
-
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(16)">
-                16A
-            </button>
-
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(20)">
-                20A
-            </button>
-
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(25)">
-                25A
-            </button>
-
-            <button
-                type="button"
-                class="amp-btn"
-                onclick="setAmp(32)">
-                32A
-            </button>
-
-        </div>
-
-        <input
-            id="amp"
-            type="hidden"
-            value="8">
-
-    </div>
-
-    <!-- Résultat -->
-
-    <div class="result">
-
-        <h2>
-
-            ⏱ Temps estimé
-
-        </h2>
-
-        <div id="temps">
-
-            0 h 00 min
-
-        </div>
-
-        <div id="energie">
-
-            Énergie chargée : 0,0 kWh
-
-        </div>
-
-        <div id="etat">
-
-            ⚡ Charge rapide AC
-
-        </div>
-
-    </div>
-
-</div>
-
-<script src="app.js"></script>
-
-</body>
-
-</html>
+            <button class="amp-btn" onclick="setAmp(16)">16A</button>
