@@ -3,43 +3,45 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<meta
-name="theme-color"
-content="#007AFF">
+    <meta
+        name="theme-color"
+        content="#007AFF">
 
-<meta
-name="apple-mobile-web-app-capable"
-content="yes">
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes">
 
-<meta
-name="apple-mobile-web-app-status-bar-style"
-content="black-translucent">
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent">
 
-<meta
-name="apple-mobile-web-app-title"
-content="Charge EV">
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Charge EV">
 
-<meta
-name="description"
-content="Calculateur de temps de recharge véhicule électrique">
+    <meta
+        name="description"
+        content="Calculateur de temps de recharge véhicule électrique">
 
-<title>⚡ Calculateur de Charge</title>
+    <title>⚡ Calculateur de Charge</title>
 
-<link rel="manifest" href="manifest.json">
+    <link
+        rel="manifest"
+        href="manifest.json">
 
-<link
-rel="apple-touch-icon"
-href="icons/icon-512.png">
+    <link
+        rel="apple-touch-icon"
+        href="icons/icon-512.png">
 
-<link
-rel="stylesheet"
-href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
 
 </head>
 
@@ -64,41 +66,31 @@ href="style.css">
     <div class="result">
 
         <h2>
-
             ⏱ Temps estimé
-
         </h2>
 
         <div id="temps">
-
             0 h 00 min
-
         </div>
 
         <div id="energie">
-
             Énergie chargée : 0,0 kWh
-
         </div>
 
         <div id="etat">
-
             ⚡ Charge rapide AC
-
         </div>
 
     </div>
 
-    <!-- Batterie + Niveaux -->
+    <!-- Batterie -->
 
     <div class="card">
 
         <div class="battery-box">
 
             <label>
-
                 🔋 Capacité batterie
-
             </label>
 
             <input
@@ -112,9 +104,7 @@ href="style.css">
         <br>
 
         <label>
-
             📉 Niveau actuel
-
         </label>
 
         <div class="controls">
@@ -122,23 +112,17 @@ href="style.css">
             <button
                 type="button"
                 onclick="changeValue('actuel',-1)">
-
                 −
-
             </button>
 
             <span id="actuelValue">
-
                 14%
-
             </span>
 
             <button
                 type="button"
                 onclick="changeValue('actuel',1)">
-
                 +
-
             </button>
 
         </div>
@@ -154,9 +138,7 @@ href="style.css">
         <br><br>
 
         <label>
-
             🎯 Niveau cible
-
         </label>
 
         <div class="controls">
@@ -164,23 +146,17 @@ href="style.css">
             <button
                 type="button"
                 onclick="changeValue('cible',-1)">
-
                 −
-
             </button>
 
             <span id="cibleValue">
-
                 80%
-
             </span>
 
             <button
                 type="button"
                 onclick="changeValue('cible',1)">
-
                 +
-
             </button>
 
         </div>
@@ -200,9 +176,7 @@ href="style.css">
     <div class="card">
 
         <label>
-
             🔌 Installation
-
         </label>
 
         <div class="phase-grid">
@@ -233,31 +207,75 @@ href="style.css">
             value="tri">
 
         <label>
-
             ⚡ Intensité
-
         </label>
 
         <div class="amp-grid">
 
-            <button class="amp-btn" onclick="setAmp(8)">8A</button>
-            <button class="amp-btn" onclick="setAmp(10)">10A</button>
-            <button class="amp-btn" onclick="setAmp(12)">12A</button>
-            <button class="amp-btn" onclick="setAmp(14)">14A</button>
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(8)">
+                8A
+            </button>
 
-            <button class="amp-btn" onclick="setAmp(16)">16A</button>
-            <button class="amp-btn" onclick="setAmp(20)">20A</button>
-            <button class="amp-btn" onclick="setAmp(25)">25A</button>
-            <button class="amp-btn" onclick="setAmp(32)">32A</button>
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(10)">
+                10A
+            </button>
 
-</div>
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(12)">
+                12A
+            </button>
 
-<input
-    id="amp"
-    type="hidden"
-    value="8">
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(14)">
+                14A
+            </button>
 
-</div>
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(16)">
+                16A
+            </button>
+
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(20)">
+                20A
+            </button>
+
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(25)">
+                25A
+            </button>
+
+            <button
+                type="button"
+                class="amp-btn"
+                onclick="setAmp(32)">
+                32A
+            </button>
+
+        </div>
+
+        <input
+            id="amp"
+            type="hidden"
+            value="8">
+
+    </div>
 
 </div>
 
