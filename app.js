@@ -1,4 +1,3 @@
-console.log("APP JS OK");
 /* ==================================
    CONFIGURATION
 ================================== */
@@ -8,7 +7,7 @@ const AMPERAGES = [
     16, 20, 25, 32
 ];
 
-const RENDEMENT = 1;
+const RENDEMENT = 1.00;
 
 /* ==================================
    SAUVEGARDE
@@ -16,16 +15,14 @@ const RENDEMENT = 1;
 
 function sauvegarder() {
 
-    const ids = [
+    [
         "capacite",
         "puissanceMax",
         "actuel",
         "cible",
         "amp",
         "phase"
-    ];
-
-    ids.forEach(id => {
+    ].forEach(id => {
 
         const el =
             document.getElementById(id);
@@ -36,9 +33,11 @@ function sauvegarder() {
                 id,
                 el.value
             );
+
         }
 
     });
+
 }
 
 /* ==================================
@@ -47,44 +46,42 @@ function sauvegarder() {
 
 function chargerPreferences() {
 
-    const ids = [
+    [
         "capacite",
         "puissanceMax",
         "actuel",
         "cible",
         "amp",
         "phase"
-    ];
+    ].forEach(id => {
 
-    ids.forEach(id => {
-
-        const valeur =
+        const value =
             localStorage.getItem(id);
 
-        const element =
+        const el =
             document.getElementById(id);
 
         if (
-            valeur !== null &&
-            element
+            value !== null &&
+            el
         ) {
 
-            element.value = valeur;
+            el.value = value;
+
         }
 
     });
+
 }
 
 /* ==================================
-   BOUTONS %
+   +/- %
 ================================== */
 
 function changeValue(id, delta) {
 
     const el =
         document.getElementById(id);
-
-    if (!el) return;
 
     let valeur =
         parseInt(el.value) + delta;
@@ -110,17 +107,14 @@ function changeValue(id, delta) {
 
 function setPhase(mode) {
 
-    const phase =
-        document.getElementById(
-            "phase"
-        );
-
-    if (!phase) return;
-
-    phase.value = mode;
+    document.getElementById(
+        "phase"
+    ).value = mode;
 
     document
-        .querySelectorAll(".phase-btn")
+        .querySelectorAll(
+            ".phase-btn"
+        )
         .forEach(btn =>
             btn.classList.remove(
                 "selected"
@@ -130,7 +124,9 @@ function setPhase(mode) {
     if (mode === "mono") {
 
         document
-            .querySelectorAll(".phase-btn")[0]
+            .querySelectorAll(
+                ".phase-btn"
+            )[0]
             ?.classList.add(
                 "selected"
             );
@@ -138,10 +134,13 @@ function setPhase(mode) {
     } else {
 
         document
-            .querySelectorAll(".phase-btn")[1]
+            .querySelectorAll(
+                ".phase-btn"
+            )[1]
             ?.classList.add(
                 "selected"
             );
+
     }
 
     update();
@@ -160,17 +159,14 @@ function setAmp(valeur) {
         valeur = 8;
     }
 
-    const amp =
-        document.getElementById(
-            "amp"
-        );
-
-    if (!amp) return;
-
-    amp.value = valeur;
+    document.getElementById(
+        "amp"
+    ).value = valeur;
 
     document
-        .querySelectorAll(".amp-btn")
+        .querySelectorAll(
+            ".amp-btn"
+        )
         .forEach(btn =>
             btn.classList.remove(
                 "selected"
@@ -178,17 +174,20 @@ function setAmp(valeur) {
         );
 
     document
-        .querySelectorAll(".amp-btn")
+        .querySelectorAll(
+            ".amp-btn"
+        )
         .forEach(btn => {
 
             if (
-                btn.textContent.trim() ===
-                valeur + "A"
+                btn.textContent.trim()
+                === valeur + "A"
             ) {
 
                 btn.classList.add(
                     "selected"
                 );
+
             }
 
         });
@@ -242,27 +241,15 @@ function update() {
             "phase"
         )?.value || "tri";
 
-    const actuelValue =
-        document.getElementById(
-            "actuelValue"
-        );
+    document.getElementById(
+        "actuelValue"
+    ).textContent =
+        actuel + "%";
 
-    const cibleValue =
-        document.getElementById(
-            "cibleValue"
-        );
-
-    if (actuelValue) {
-
-        actuelValue.textContent =
-            actuel + "%";
-    }
-
-    if (cibleValue) {
-
-        cibleValue.textContent =
-            cible + "%";
-    }
+    document.getElementById(
+        "cibleValue"
+    ).textContent =
+        cible + "%";
 
     if (cible <= actuel) {
 
@@ -277,11 +264,6 @@ function update() {
             "Énergie chargée : 0,0 kWh";
 
         document.getElementById(
-            "puissance"
-        ).textContent =
-            "Puissance utilisée : 0,0 kW";
-
-        document.getElementById(
             "etat"
         ).textContent =
             "✅ Niveau atteint";
@@ -290,35 +272,47 @@ function update() {
     }
 
     const energie =
+        (
+            (cible - actuel)
+            * capacite
+        ) / 100;
 
-        ((cible - actuel)
-        * capacite)
-        / 100;
+    const vehiculeMonophase =
+        puissanceMaxVehicule < 8;
 
     let puissanceInstallation = 0;
 
-    if (phase === "mono") {
+    if (
+        phase === "mono" ||
+        vehiculeMonophase
+    ) {
 
         puissanceInstallation =
-            ((230 * amp) / 1000)
-            * RENDEMENT;
+            (230 * amp)
+            / 1000;
 
-    } else {
+    }
+    else {
 
         puissanceInstallation =
-            ((1.732 * 400 * amp) / 1000)
-            * RENDEMENT;
+            (
+                1.732 *
+                400 *
+                amp
+            ) / 1000;
+
     }
 
-    const puissanceUtilisee =
+    puissanceInstallation *=
+        RENDEMENT;
 
+    const puissanceUtilisee =
         Math.min(
             puissanceInstallation,
             puissanceMaxVehicule
         );
 
     const heures =
-
         energie /
         puissanceUtilisee;
 
@@ -329,13 +323,16 @@ function update() {
 
     let min =
         Math.round(
-            (heures - h) * 60
+            (
+                heures - h
+            ) * 60
         );
 
     if (min >= 60) {
 
         h++;
         min = 0;
+
     }
 
     document.getElementById(
@@ -375,6 +372,17 @@ function update() {
 
         + " kW";
 
+    const typeInstallation =
+
+        (
+            phase === "mono" ||
+            vehiculeMonophase
+        )
+
+        ? "1Φ"
+
+        : "3Φ";
+
     document.getElementById(
         "puissanceInstallation"
     ).textContent =
@@ -385,7 +393,11 @@ function update() {
             .toFixed(1)
             .replace(".", ",")
 
-        + " kW";
+        + " kW (" +
+
+        typeInstallation +
+
+        ")";
 
     document.getElementById(
         "puissanceVehicule"
@@ -431,6 +443,7 @@ function update() {
 
         etat =
             "⚡ Charge rapide AC";
+
     }
 
     document.getElementById(
@@ -439,6 +452,7 @@ function update() {
         etat;
 
     sauvegarder();
+
 }
 
 /* ==================================
@@ -466,6 +480,7 @@ document.addEventListener(
         );
 
         update();
+
     }
 );
 
@@ -490,13 +505,16 @@ if (
                         "service-worker.js"
                     );
 
-            } catch (error) {
+            }
+            catch (error) {
 
                 console.error(
                     error
                 );
+
             }
 
         }
     );
+
 }
