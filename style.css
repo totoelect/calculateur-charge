@@ -8,6 +8,8 @@
 
     --text: #FFFFFF;
     --text2: #AFC1D3;
+
+    --green: #30D158;
 }
 
 /* ==========================
@@ -15,6 +17,7 @@
 ========================== */
 
 * {
+
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -42,7 +45,7 @@ body {
 
     color: white;
 
-    padding: 4px;
+    padding: 6px;
 
     overflow-y: auto;
 }
@@ -62,7 +65,7 @@ body {
 
     gap: 8px;
 
-    padding-bottom: 10px;
+    padding-bottom: 12px;
 }
 
 /* ==========================
@@ -91,7 +94,6 @@ body {
 .vehicle-banner h2 {
 
     font-size: 1.25rem;
-
     font-weight: 700;
 }
 
@@ -108,7 +110,7 @@ body {
 
 .card {
 
-    padding: 8px;
+    padding: 10px;
 
     border-radius: 18px;
 
@@ -117,8 +119,6 @@ body {
 
     border:
         1px solid rgba(0,122,255,.12);
-
-    overflow: visible;
 }
 
 .card label {
@@ -138,7 +138,7 @@ body {
 
 .result {
 
-    padding: 10px;
+    padding: 12px;
 
     border-radius: 20px;
 
@@ -147,41 +147,54 @@ body {
     background:
         linear-gradient(
             135deg,
-            #1C86F2,
-            #10C8C8
+            #007AFF,
+            #00C7BE
         );
+
+    box-shadow:
+        0 0 15px
+        rgba(0,199,190,.25);
 }
 
 .result h2 {
 
     font-size: 1rem;
 
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 #temps {
 
-    font-size: 2rem;
+    font-size: 2.1rem;
 
     font-weight: 800;
 
-    line-height: 1;
+    margin-bottom: 6px;
 
-    margin-bottom: 4px;
+    line-height: 1.1;
 }
 
 #energie {
 
-    font-size: .85rem;
-
-    font-weight: 600;
+    font-size: .90rem;
 
     margin-bottom: 4px;
 }
 
+#puissance {
+
+    font-size: .85rem;
+
+    margin-bottom: 4px;
+
+    font-weight: 600;
+}
+
 #etat {
 
-    font-size: .9rem;
+    font-size: .85rem;
+
+    font-weight: 600;
 }
 
 /* ==========================
@@ -197,7 +210,16 @@ body {
     align-items: center;
 }
 
-#capacite {
+.battery-row {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.battery-row input {
 
     width: 90px;
 
@@ -218,6 +240,30 @@ body {
     font-weight: 700;
 }
 
+.battery-row input:focus {
+
+    outline: none;
+
+    box-shadow:
+        0 0 10px
+        rgba(0,122,255,.5);
+}
+
+.battery-units {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 55px;
+
+    margin-top: 4px;
+
+    font-size: .75rem;
+
+    color: var(--text2);
+}
+
 /* ==========================
    CONTROLES %
 ========================== */
@@ -229,6 +275,8 @@ body {
     justify-content: space-between;
 
     align-items: center;
+
+    margin-bottom: 4px;
 }
 
 .controls span {
@@ -258,19 +306,24 @@ body {
     color: white;
 
     font-size: 20px;
+
+    cursor: pointer;
+}
+
+.controls button:active {
+
+    transform: scale(.95);
 }
 
 input[type="range"] {
 
     width: 100%;
 
-    margin-top: 4px;
-
     accent-color: #007AFF;
 }
 
 /* ==========================
-   GRILLE PHASES
+   INSTALLATION
 ========================== */
 
 .phase-grid {
@@ -286,7 +339,7 @@ input[type="range"] {
 }
 
 /* ==========================
-   GRILLE AMPERAGE
+   AMPERAGES
 ========================== */
 
 .amp-grid {
@@ -298,9 +351,9 @@ input[type="range"] {
 
     gap: 4px;
 
-    margin-top: 6px;
-
     width: 100%;
+
+    margin-top: 4px;
 }
 
 /* ==========================
@@ -332,6 +385,8 @@ input[type="range"] {
     font-weight: 700;
 
     cursor: pointer;
+
+    transition: .15s;
 }
 
 .phase-btn.selected,
@@ -346,28 +401,72 @@ input[type="range"] {
 
     box-shadow:
         0 0 8px
-        rgba(0,199,190,.45);
+        rgba(0,199,190,.50);
+}
+
+.phase-btn:active,
+.amp-btn:active {
+
+    transform: scale(.97);
+}
+
+/* ==========================
+   INFORMATIONS PUISSANCE
+========================== */
+
+.puissance-card {
+
+    text-align: center;
+
+    font-size: .85rem;
+}
+
+#puissanceInstallation {
+
+    color: var(--cyan);
+
+    font-weight: 700;
+
+    margin-bottom: 4px;
+}
+
+#puissanceVehicule {
+
+    color: var(--text2);
+
+    margin-bottom: 4px;
+}
+
+#puissanceReelle {
+
+    color: var(--green);
+
+    font-weight: 700;
 }
 
 /* ==========================
    MOBILE
 ========================== */
 
-@media (max-height:700px) {
+@media (max-height: 700px) {
 
     .vehicle-banner {
+
         padding: 6px;
     }
 
     .vehicle-banner h2 {
-        font-size: 1.10rem;
+
+        font-size: 1.1rem;
     }
 
     .card {
-        padding: 6px;
+
+        padding: 8px;
     }
 
     #temps {
+
         font-size: 1.8rem;
     }
 
@@ -379,11 +478,24 @@ input[type="range"] {
         font-size: 11px;
     }
 
-    #energie {
+    .battery-row input {
 
-        font-size: .75rem;
+        width: 80px;
+
+        height: 38px;
+
+        font-size: 16px;
     }
 
+    .battery-units {
+
+        gap: 45px;
+
+        font-size: .70rem;
+    }
+
+    #energie,
+    #puissance,
     #etat {
 
         font-size: .75rem;
