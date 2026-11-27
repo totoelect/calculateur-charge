@@ -8,7 +8,7 @@ const AMPERAGES = [
     16, 20, 25, 32
 ];
 
-const RENDEMENT = 0.90;
+const RENDEMENT = 1;
 
 /* ==================================
    SAUVEGARDE
